@@ -1,0 +1,9 @@
+format: jb-book
+root: intro
+chapters:
+  - file: 01_verificaciones
+  - file: 02_ridge
+  - file: 03_lasso_lars
+  - file: 04_bayes
+  - file: apendice_codigo
+  - file: referencias

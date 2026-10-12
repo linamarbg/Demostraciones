@@ -1,0 +1,7 @@
+1) ortonormal  max|soft - sklearn| = 8.881784197001252e-16
+   ridge = ols*n/(n+lam): True
+2) coord. descent max|cd - sklearn| = 1.8139711954745508e-10
+3) LARS-lasso: nudos propios = 13  sklearn = 13  cruces por cero = 1
+   max|C - n*alpha| = 2.4584778657299466e-12
+   max|beta - beta_sklearn| = 1.4921397450962104e-11
+   violacion maxima de KKT en los nudos = 5.253797397131166e-12

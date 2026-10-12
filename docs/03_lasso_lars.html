@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Estimación lasso y algoritmo LARS &#8212; Demostraciones de regresión ridge, lasso y regla óptima de Bayes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="_static/../mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_lasso_lars';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Verificación de la regla óptima de Bayes" href="04_bayes.html" />
+    <link rel="prev" title="Propiedades del estimador ridge (3.12)" href="02_ridge.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_verificaciones.html">Verificaciones de la sección 3.4.2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_ridge.html">Propiedades del estimador ridge (3.12)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimación lasso y algoritmo LARS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_bayes.html">Verificación de la regla óptima de Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Apéndice: código de verificación numérica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/03_lasso_lars.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Estimación lasso y algoritmo LARS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#planteamiento">1. Planteamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-de-optimalidad-kkt">2. Condiciones de optimalidad (KKT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-ortogonal-umbralizacion-suave">3. Caso ortogonal: umbralización suave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-general-descenso-por-coordenadas">4. Caso general: descenso por coordenadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-lars-efron-et-al-2004">5. El algoritmo LARS (Efron et al., 2004)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">5.1 Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-y-direccion-equiangular">5.2 Notación y dirección equiangular</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longitud-del-paso">5.3 Longitud del paso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-con-la-modificacion-lasso">5.4 Algoritmo con la modificación lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-parametro-lambda">5.5 Relación con el parámetro <span class="math notranslate nohighlight">\(\lambda\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">6. Verificación numérica</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="estimacion-lasso-y-algoritmo-lars">
+<h1>Estimación lasso y algoritmo LARS<a class="headerlink" href="#estimacion-lasso-y-algoritmo-lars" title="Link to this heading">#</a></h1>
+<section id="planteamiento">
+<h2>1. Planteamiento<a class="headerlink" href="#planteamiento" title="Link to this heading">#</a></h2>
+<p>Se trabaja con los datos observados normalizados como en (3.11), verificado en el <a class="reference internal" href="01_verificaciones.html"><span class="doc">capítulo 1</span></a>: <span class="math notranslate nohighlight">\(\sum_i y_i=0\)</span>, <span class="math notranslate nohighlight">\(\sum_i x_{ij}=0\)</span> y <span class="math notranslate nohighlight">\(\sum_i x_{ij}^2=n\)</span>. El estimador lasso minimiza</p>
+<div class="math notranslate nohighlight">
+\[
+S_\lambda(\boldsymbol{\beta})=(\boldsymbol{y}-X\boldsymbol{\beta})^T(\boldsymbol{y}-X\boldsymbol{\beta})+\lambda\sum_{j=1}^{p}|\beta_j|,\qquad \lambda&gt;0 .
+\]</div>
+<p>A diferencia de ridge, la penalización <span class="math notranslate nohighlight">\(|\beta_j|\)</span> no es diferenciable en <span class="math notranslate nohighlight">\(\beta_j=0\)</span>. Por eso no se puede igualar el gradiente a cero y despejar, y no existe una fórmula cerrada general como <span class="math notranslate nohighlight">\((X^TX+\lambda I_p)^{-1}X^T\boldsymbol{y}\)</span>. El análisis se hace con subgradientes y conduce a tres resultados: las condiciones de optimalidad (KKT), la solución exacta en el caso ortogonal y dos algoritmos para el caso general (descenso por coordenadas y LARS).</p>
+</section>
+<section id="condiciones-de-optimalidad-kkt">
+<h2>2. Condiciones de optimalidad (KKT)<a class="headerlink" href="#condiciones-de-optimalidad-kkt" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(S_\lambda\)</span> es convexa: suma de una forma cuadrática convexa y de una norma <span class="math notranslate nohighlight">\(\ell_1\)</span>. Por tanto, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}\)</span> es un mínimo global si y solo si <span class="math notranslate nohighlight">\(\boldsymbol{0}\in\partial S_\lambda(\hat{\boldsymbol{\beta}})\)</span>. El subdiferencial de <span class="math notranslate nohighlight">\(|b|\)</span> es <span class="math notranslate nohighlight">\(\{\operatorname{sign}(b)\}\)</span> si <span class="math notranslate nohighlight">\(b\neq 0\)</span> y el intervalo <span class="math notranslate nohighlight">\([-1,1]\)</span> si <span class="math notranslate nohighlight">\(b=0\)</span>. La parte cuadrática tiene gradiente <span class="math notranslate nohighlight">\(-2X^T(\boldsymbol{y}-X\boldsymbol{\beta})\)</span>, como en (3.10) con <span class="math notranslate nohighlight">\(\lambda=0\)</span>. Entonces, para cada <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+-2\boldsymbol{x}_j^T(\boldsymbol{y}-X\hat{\boldsymbol{\beta}})+\lambda s_j=0,\qquad s_j\in\partial|\hat\beta_j| .
+\]</div>
+<p>Esto equivale a</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+2\,\boldsymbol{x}_j^T(\boldsymbol{y}-X\hat{\boldsymbol{\beta}})&amp;=\lambda\operatorname{sign}(\hat\beta_j) &amp;&amp;\text{si }\hat\beta_j\neq 0,\\
+\left|2\,\boldsymbol{x}_j^T(\boldsymbol{y}-X\hat{\boldsymbol{\beta}})\right|&amp;\le\lambda &amp;&amp;\text{si }\hat\beta_j=0 .
+\end{aligned}
+\end{split}\]</div>
+<p>Interpretación: la correlación de cada variable con el residuo nunca supera <span class="math notranslate nohighlight">\(\lambda/2\)</span> en valor absoluto. Las variables con coeficiente distinto de cero la alcanzan exactamente, y su signo coincide con el del coeficiente. Como consecuencia, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}=\boldsymbol{0}\)</span> cuando</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda\ge\lambda_{\max}=2\max_j|\boldsymbol{x}_j^T\boldsymbol{y}| .
+\]</div>
+</section>
+<section id="caso-ortogonal-umbralizacion-suave">
+<h2>3. Caso ortogonal: umbralización suave<a class="headerlink" href="#caso-ortogonal-umbralizacion-suave" title="Link to this heading">#</a></h2>
+<p>Si <span class="math notranslate nohighlight">\(X^TX=nI_p\)</span>, el estimador de mínimos cuadrados es <span class="math notranslate nohighlight">\(\hat\beta_j^{\mathrm{MCO}}=\boldsymbol{x}_j^T\boldsymbol{y}/n\)</span>. Al desarrollar <span class="math notranslate nohighlight">\(S_\lambda\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S_\lambda(\boldsymbol{\beta})=\boldsymbol{y}^T\boldsymbol{y}+\sum_{j=1}^p\left[n\beta_j^2-2n\hat\beta_j^{\mathrm{MCO}}\beta_j+\lambda|\beta_j|\right].
+\]</div>
+<p>El problema se separa en <span class="math notranslate nohighlight">\(p\)</span> problemas unidimensionales. La condición KKT de cada coordenada es <span class="math notranslate nohighlight">\(2n\beta_j-2n\hat\beta_j^{\mathrm{MCO}}+\lambda s_j=0\)</span>, que da tres casos:</p>
+<ul class="simple">
+<li><p>Si <span class="math notranslate nohighlight">\(\beta_j&gt;0\)</span> (con <span class="math notranslate nohighlight">\(s_j=1\)</span>): <span class="math notranslate nohighlight">\(\beta_j=\hat\beta_j^{\mathrm{MCO}}-\lambda/(2n)\)</span>, válido cuando <span class="math notranslate nohighlight">\(\hat\beta_j^{\mathrm{MCO}}&gt;\lambda/(2n)\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\beta_j&lt;0\)</span> (con <span class="math notranslate nohighlight">\(s_j=-1\)</span>): <span class="math notranslate nohighlight">\(\beta_j=\hat\beta_j^{\mathrm{MCO}}+\lambda/(2n)\)</span>, válido cuando <span class="math notranslate nohighlight">\(\hat\beta_j^{\mathrm{MCO}}&lt;-\lambda/(2n)\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(|\hat\beta_j^{\mathrm{MCO}}|\le\lambda/(2n)\)</span>: <span class="math notranslate nohighlight">\(\beta_j=0\)</span> con <span class="math notranslate nohighlight">\(s_j=2n\hat\beta_j^{\mathrm{MCO}}/\lambda\in[-1,1]\)</span>.</p></li>
+</ul>
+<p>Los tres casos se resumen en el operador de umbralización suave:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat\beta_j^{\mathrm{lasso}}=\operatorname{sign}\!\left(\hat\beta_j^{\mathrm{MCO}}\right)\left(\left|\hat\beta_j^{\mathrm{MCO}}\right|-\frac{\lambda}{2n}\right)_+ ,\qquad (t)_+=\max(t,0).
+\]</div>
+<p>En el mismo caso ortogonal, el estimador ridge es <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}_R=(nI_p+\lambda I_p)^{-1}X^T\boldsymbol{y}=\dfrac{n}{n+\lambda}\hat{\boldsymbol{\beta}}^{\mathrm{MCO}}\)</span>. Ridge contrae todos los coeficientes por el mismo factor y nunca produce ceros exactos. Lasso resta una constante y trunca en cero, de modo que los coeficientes pequeños quedan exactamente en cero. Esta es la diferencia de fondo entre ambos estimadores.</p>
+</section>
+<section id="caso-general-descenso-por-coordenadas">
+<h2>4. Caso general: descenso por coordenadas<a class="headerlink" href="#caso-general-descenso-por-coordenadas" title="Link to this heading">#</a></h2>
+<p>Para <span class="math notranslate nohighlight">\(X^TX\)</span> arbitraria con <span class="math notranslate nohighlight">\(\sum_i x_{ij}^2=n\)</span>, se fijan todos los coeficientes salvo <span class="math notranslate nohighlight">\(\beta_j\)</span> y se define el residuo parcial <span class="math notranslate nohighlight">\(\boldsymbol{r}_j=\boldsymbol{y}-\sum_{k\neq j}\boldsymbol{x}_k\beta_k\)</span>. Como <span class="math notranslate nohighlight">\(\boldsymbol{x}_j^T\boldsymbol{x}_j=n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+S_\lambda=\|\boldsymbol{r}_j-\boldsymbol{x}_j\beta_j\|^2+\lambda|\beta_j|+\text{const}=n\beta_j^2-2\beta_j\,\boldsymbol{x}_j^T\boldsymbol{r}_j+\lambda|\beta_j|+\text{const}.
+\]</div>
+<p>Esto es el problema unidimensional de la sección 3 con <span class="math notranslate nohighlight">\(\hat\beta_j^{\mathrm{MCO}}\)</span> reemplazado por <span class="math notranslate nohighlight">\(\boldsymbol{x}_j^T\boldsymbol{r}_j/n\)</span>. La actualización de cada coordenada es</p>
+<div class="math notranslate nohighlight">
+\[
+\beta_j\leftarrow \mathcal{S}_{\lambda/(2n)}\!\left(\frac{\boldsymbol{x}_j^T\boldsymbol{r}_j}{n}\right),\qquad \mathcal{S}_t(z)=\operatorname{sign}(z)(|z|-t)_+ .
+\]</div>
+<p>Se recorren las coordenadas <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span> cíclicamente hasta convergencia. Como <span class="math notranslate nohighlight">\(S_\lambda\)</span> es convexa y la penalización es separable, el procedimiento converge al mínimo global. Este método resuelve un valor de <span class="math notranslate nohighlight">\(\lambda\)</span> cada vez; es el que usa <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> de scikit-learn. LARS, en cambio, entrega el camino completo para todos los <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+</section>
+<section id="el-algoritmo-lars-efron-et-al-2004">
+<h2>5. El algoritmo LARS (Efron et al., 2004)<a class="headerlink" href="#el-algoritmo-lars-efron-et-al-2004" title="Link to this heading">#</a></h2>
+<section id="idea">
+<h3>5.1 Idea<a class="headerlink" href="#idea" title="Link to this heading">#</a></h3>
+<p>La selección progresiva (<em>forward selection</em>) incorpora la variable más correlacionada con el residuo y ajusta por completo, lo que es demasiado agresivo. La regresión por etapas (<em>stagewise</em>) avanza en pasos diminutos. LARS avanza exactamente lo necesario: mueve los coeficientes de las variables activas en la dirección que mantiene iguales sus correlaciones con el residuo, hasta que una variable inactiva alcanza esa misma correlación y entra al conjunto activo.</p>
+<p>En esta sección las columnas se escalan a norma unitaria, <span class="math notranslate nohighlight">\(\boldsymbol{x}_j^T\boldsymbol{x}_j=1\)</span>, que es la convención del artículo. Basta reescalar (3.11) por <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>; el problema es el mismo con <span class="math notranslate nohighlight">\(\lambda\)</span> y los coeficientes reescalados.</p>
+</section>
+<section id="notacion-y-direccion-equiangular">
+<h3>5.2 Notación y dirección equiangular<a class="headerlink" href="#notacion-y-direccion-equiangular" title="Link to this heading">#</a></h3>
+<p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{r}=\boldsymbol{y}-X\boldsymbol{\beta}\)</span> el residuo actual, <span class="math notranslate nohighlight">\(\boldsymbol{c}=X^T\boldsymbol{r}\)</span> las correlaciones, <span class="math notranslate nohighlight">\(C=\max_j|c_j|\)</span> y <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> el conjunto activo, con signos <span class="math notranslate nohighlight">\(\boldsymbol{s}_\mathcal{A}=\operatorname{sign}(\boldsymbol{c}_\mathcal{A})\)</span>. Con <span class="math notranslate nohighlight">\(G_\mathcal{A}=X_\mathcal{A}^TX_\mathcal{A}\)</span> se define</p>
+<div class="math notranslate nohighlight">
+\[
+A_\mathcal{A}=\left(\boldsymbol{s}_\mathcal{A}^TG_\mathcal{A}^{-1}\boldsymbol{s}_\mathcal{A}\right)^{-1/2},\qquad
+\boldsymbol{w}_\mathcal{A}=A_\mathcal{A}\,G_\mathcal{A}^{-1}\boldsymbol{s}_\mathcal{A},\qquad
+\boldsymbol{u}_\mathcal{A}=X_\mathcal{A}\boldsymbol{w}_\mathcal{A}.
+\]</div>
+<p>Se verifica que <span class="math notranslate nohighlight">\(\boldsymbol{u}_\mathcal{A}\)</span> es el vector equiangular:</p>
+<div class="math notranslate nohighlight">
+\[
+\|\boldsymbol{u}_\mathcal{A}\|^2=\boldsymbol{w}_\mathcal{A}^TG_\mathcal{A}\boldsymbol{w}_\mathcal{A}=A_\mathcal{A}^2\,\boldsymbol{s}_\mathcal{A}^TG_\mathcal{A}^{-1}\boldsymbol{s}_\mathcal{A}=1,
+\qquad
+X_\mathcal{A}^T\boldsymbol{u}_\mathcal{A}=G_\mathcal{A}\boldsymbol{w}_\mathcal{A}=A_\mathcal{A}\,\boldsymbol{s}_\mathcal{A}.
+\]</div>
+<p>Cada variable activa forma el mismo ángulo con <span class="math notranslate nohighlight">\(\boldsymbol{u}_\mathcal{A}\)</span>. Si los coeficientes activos avanzan una longitud <span class="math notranslate nohighlight">\(\gamma\)</span> en esa dirección, <span class="math notranslate nohighlight">\(\boldsymbol{\beta}_\mathcal{A}(\gamma)=\boldsymbol{\beta}_\mathcal{A}+\gamma\boldsymbol{w}_\mathcal{A}\)</span>, entonces el residuo y las correlaciones cambian así:</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{r}(\gamma)=\boldsymbol{r}-\gamma\boldsymbol{u}_\mathcal{A},\qquad
+c_j(\gamma)=c_j-\gamma a_j,\quad \boldsymbol{a}=X^T\boldsymbol{u}_\mathcal{A}.
+\]</div>
+<p>Para <span class="math notranslate nohighlight">\(j\in\mathcal{A}\)</span> se tiene <span class="math notranslate nohighlight">\(a_j=A_\mathcal{A}s_j\)</span>, luego <span class="math notranslate nohighlight">\(|c_j(\gamma)|=C-\gamma A_\mathcal{A}\)</span>: todas las correlaciones activas permanecen iguales y decrecen linealmente.</p>
+</section>
+<section id="longitud-del-paso">
+<h3>5.3 Longitud del paso<a class="headerlink" href="#longitud-del-paso" title="Link to this heading">#</a></h3>
+<p>Una variable inactiva <span class="math notranslate nohighlight">\(k\)</span> entra cuando <span class="math notranslate nohighlight">\(|c_k(\gamma)|=C-\gamma A_\mathcal{A}\)</span>, es decir, en</p>
+<div class="math notranslate nohighlight">
+\[
+\hat\gamma_k=\min\nolimits^{+}\left\{\frac{C-c_k}{A_\mathcal{A}-a_k},\ \frac{C+c_k}{A_\mathcal{A}+a_k}\right\},\qquad \hat\gamma=\min_{k\notin\mathcal{A}}\hat\gamma_k ,
+\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\min^{+}\)</span> es el menor de los valores positivos. Si no quedan variables inactivas, <span class="math notranslate nohighlight">\(\hat\gamma=C/A_\mathcal{A}\)</span> y se llega a la solución de mínimos cuadrados.</p>
+</section>
+<section id="algoritmo-con-la-modificacion-lasso">
+<h3>5.4 Algoritmo con la modificación lasso<a class="headerlink" href="#algoritmo-con-la-modificacion-lasso" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Inicializar <span class="math notranslate nohighlight">\(\boldsymbol{\beta}=\boldsymbol{0}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{r}=\boldsymbol{y}\)</span> y <span class="math notranslate nohighlight">\(\mathcal{A}=\{\arg\max_j|\boldsymbol{x}_j^T\boldsymbol{y}|\}\)</span>.</p></li>
+<li><p>Calcular <span class="math notranslate nohighlight">\(\boldsymbol{c}\)</span>, <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{s}_\mathcal{A}\)</span>, <span class="math notranslate nohighlight">\(A_\mathcal{A}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{w}_\mathcal{A}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{u}_\mathcal{A}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{a}\)</span>.</p></li>
+<li><p>Calcular <span class="math notranslate nohighlight">\(\hat\gamma\)</span> y la variable <span class="math notranslate nohighlight">\(k^\star\)</span> que lo alcanza (sección 5.3).</p></li>
+<li><p>Modificación lasso: para <span class="math notranslate nohighlight">\(j\in\mathcal{A}\)</span> calcular <span class="math notranslate nohighlight">\(\gamma_j=-\beta_j/w_j\)</span> (solo si es positivo) y <span class="math notranslate nohighlight">\(\tilde\gamma=\min_j\gamma_j\)</span>.</p>
+<ul class="simple">
+<li><p>Si <span class="math notranslate nohighlight">\(\tilde\gamma&lt;\hat\gamma\)</span>: avanzar <span class="math notranslate nohighlight">\(\tilde\gamma\)</span> (con <span class="math notranslate nohighlight">\(\boldsymbol{\beta}_\mathcal{A}\leftarrow\boldsymbol{\beta}_\mathcal{A}+\tilde\gamma\boldsymbol{w}_\mathcal{A}\)</span>), fijar <span class="math notranslate nohighlight">\(\beta_j=0\)</span> y retirar <span class="math notranslate nohighlight">\(j\)</span> de <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>.</p></li>
+<li><p>En caso contrario: avanzar <span class="math notranslate nohighlight">\(\hat\gamma\)</span> y agregar <span class="math notranslate nohighlight">\(k^\star\)</span> a <span class="math notranslate nohighlight">\(\mathcal{A}\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Repetir los pasos 2 a 4 hasta que <span class="math notranslate nohighlight">\(C=0\)</span> (solución de mínimos cuadrados).</p></li>
+</ol>
+<p>El paso 4 es necesario. La condición KKT exige <span class="math notranslate nohighlight">\(\operatorname{sign}(\hat\beta_j)=\operatorname{sign}(c_j)\)</span> para las variables activas. LARS sin modificar puede hacer que un coeficiente cruce por cero mientras su correlación conserva el signo, y entonces el resultado deja de ser lasso. Con la modificación, el camino coincide exactamente con el de lasso.</p>
+</section>
+<section id="relacion-con-el-parametro-lambda">
+<h3>5.5 Relación con el parámetro <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#relacion-con-el-parametro-lambda" title="Link to this heading">#</a></h3>
+<p>En cada punto del camino, las variables activas cumplen <span class="math notranslate nohighlight">\(|c_j|=C\)</span>. Comparando con la condición KKT de la sección 2, el punto es la solución lasso para</p>
+<div class="math notranslate nohighlight">
+\[
+\lambda=2C ,
+\]</div>
+<p>donde, con columnas de norma unitaria, <span class="math notranslate nohighlight">\(\lambda\)</span> está medido en la escala reescalada. Se concluye que:</p>
+<ul class="simple">
+<li><p>El camino <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}(\lambda)\)</span> es lineal a trozos, con nudos donde cambia el conjunto activo.</p></li>
+<li><p>El primer nudo es <span class="math notranslate nohighlight">\(\lambda_{\max}=2\max_j|\boldsymbol{x}_j^T\boldsymbol{y}|\)</span>, donde <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}=\boldsymbol{0}\)</span>.</p></li>
+<li><p>Basta calcular los nudos e interpolar linealmente para obtener la solución con cualquier <span class="math notranslate nohighlight">\(\lambda\)</span>. El costo total es del mismo orden que un ajuste de mínimos cuadrados con las <span class="math notranslate nohighlight">\(p\)</span> variables.</p></li>
+<li><p>Cada solución corresponde a la forma restringida del Ejercicio 5: minimizar la suma de cuadrados sujeto a <span class="math notranslate nohighlight">\(\sum_j|\beta_j|\le\eta\)</span>, con <span class="math notranslate nohighlight">\(\eta=\|\hat{\boldsymbol{\beta}}(\lambda)\|_1\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="verificacion-numerica">
+<h2>6. Verificación numérica<a class="headerlink" href="#verificacion-numerica" title="Link to this heading">#</a></h2>
+<p>Se programó el algoritmo de la sección 5.4 en Python (código completo en el <a class="reference internal" href="apendice_codigo.html"><span class="doc">apéndice</span></a>) y se comparó con scikit-learn. Para LARS se usó el conjunto <em>diabetes</em> (<span class="math notranslate nohighlight">\(n=442\)</span>, <span class="math notranslate nohighlight">\(p=10\)</span>), centrado y con columnas de norma unitaria.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Comprobación</p></th>
+<th class="head text-left"><p>Resultado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Umbralización suave vs. <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> (caso ortogonal, <span class="math notranslate nohighlight">\(n=200\)</span>, <span class="math notranslate nohighlight">\(p=5\)</span>)</p></td>
+<td class="text-left"><p>diferencia máxima 8.9e-16</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ridge ortogonal igual a <span class="math notranslate nohighlight">\(\hat\beta^{\mathrm{MCO}}\,n/(n+\lambda)\)</span></p></td>
+<td class="text-left"><p>se cumple</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Descenso por coordenadas vs. <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> (diabetes, <span class="math notranslate nohighlight">\(\lambda=0.15\,\lambda_{\max}\)</span>)</p></td>
+<td class="text-left"><p>diferencia máxima 1.8e-10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>LARS propio vs. <code class="docutils literal notranslate"><span class="pre">lars_path(method=&quot;lasso&quot;)</span></code></p></td>
+<td class="text-left"><p>13 nudos en ambos; coeficientes difieren 1.5e-11</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Relación <span class="math notranslate nohighlight">\(\lambda=2C\)</span> (en sklearn, <span class="math notranslate nohighlight">\(\alpha=C/n\)</span>)</p></td>
+<td class="text-left"><p>diferencia máxima 2.5e-12</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Condiciones KKT en cada nudo</p></td>
+<td class="text-left"><p>violación máxima 5.3e-12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En este conjunto hay un cruce por cero: una variable sale del conjunto activo y vuelve a entrar. Por eso el camino tiene más nudos que variables entradas, y muestra que la modificación del paso 4 es necesaria.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_ridge.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Propiedades del estimador ridge (3.12)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_bayes.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Verificación de la regla óptima de Bayes</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#planteamiento">1. Planteamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-de-optimalidad-kkt">2. Condiciones de optimalidad (KKT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-ortogonal-umbralizacion-suave">3. Caso ortogonal: umbralización suave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-general-descenso-por-coordenadas">4. Caso general: descenso por coordenadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-lars-efron-et-al-2004">5. El algoritmo LARS (Efron et al., 2004)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">5.1 Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notacion-y-direccion-equiangular">5.2 Notación y dirección equiangular</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longitud-del-paso">5.3 Longitud del paso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-con-la-modificacion-lasso">5.4 Algoritmo con la modificación lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relacion-con-el-parametro-lambda">5.5 Relación con el parámetro <span class="math notranslate nohighlight">\(\lambda\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-numerica">6. Verificación numérica</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Buelvas y Camilo Molina
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

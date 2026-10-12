@@ -1,0 +1,25 @@
+title: Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+author: Lina Buelvas y Camilo Molina
+copyright: "2026"
+logo: ""
+exclude_patterns:
+  - README.md
+  - docs
+  - word
+  - _extra
+execute:
+  execute_notebooks: "off"
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - colon_fence
+sphinx:
+  config:
+    language: es
+    # MathJax local (carpeta _extra/mathjax): las ecuaciones se ven sin conexión a internet
+    html_extra_path:
+      - _extra
+    mathjax_path: ../mathjax/tex-mml-chtml.js
+html:
+  use_issues_button: false
+  use_repository_button: false
