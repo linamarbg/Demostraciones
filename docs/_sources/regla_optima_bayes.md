@@ -1,4 +1,4 @@
-# Verificación de la regla óptima de Bayes
+# Regla óptima de Bayes
 
 **Desigualdad e igualdad de la pérdida esperada del clasificador.**
 

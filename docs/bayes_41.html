@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Verificaciones de la sección 3.4.2 &#8212; Demostraciones de regresión ridge, lasso y regla óptima de Bayes</title>
+    <title>Clasificador bayesiano (sección 4.1) &#8212; Machine Learning: demostraciones</title>
   
   
   
@@ -63,12 +63,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="_static/../mathjax/tex-mml-chtml.js?v=cadf963e"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '01_verificaciones';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'bayes_41';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Propiedades del estimador ridge (3.12)" href="02_ridge.html" />
-    <link rel="prev" title="Demostraciones de regresión ridge, lasso y regla óptima de Bayes" href="intro.html" />
+    <link rel="next" title="Regla óptima de Bayes" href="regla_optima_bayes.html" />
+    <link rel="prev" title="Lasso y algoritmo LARS" href="lasso_lars.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -196,7 +196,7 @@
   
   
   
-    <p class="title logo__title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+    <p class="title logo__title">Machine Learning: demostraciones</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -212,16 +212,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+                    Machine Learning: demostraciones
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Verificaciones de la sección 3.4.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_ridge.html">Propiedades del estimador ridge (3.12)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_lasso_lars.html">Estimación lasso y algoritmo LARS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_bayes.html">Verificación de la regla óptima de Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Apéndice: código de verificación numérica</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Vecino más cercano</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lema_21.html">Lema 2.1: cota del error de 1-NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lema_22.html">Lema 2.2: masa de las celdas no visitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Regresión regularizada</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ridge.html">Regresión ridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso_lars.html">Lasso y algoritmo LARS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Clasificación bayesiana</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Clasificador bayesiano (sección 4.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regla_optima_bayes.html">Regla óptima de Bayes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Boosting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adaboost_53.html">AdaBoost (sección 5.3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Máquinas de vectores de soporte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svr_613.html">Regresión SVR con tubo <span class="math notranslate nohighlight">\(\varepsilon\)</span> (sección 6.13)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Anexo: verificación numérica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
 </ul>
 
@@ -282,7 +302,7 @@
       
       
       
-      <li><a href="_sources/01_verificaciones.md" target="_blank"
+      <li><a href="_sources/bayes_41.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Verificaciones de la sección 3.4.2</h1>
+    <h1>Clasificador bayesiano (sección 4.1)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,9 +388,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-columnas-de-z-suman-cero">1. Las columnas de <span class="math notranslate nohighlight">\(Z\)</span> suman cero</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-de-las-igualdades-3-11">2. Verificación de las igualdades (3.11)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consecuencias">3. Consecuencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-teorema-de-bayes">Paso 1 · Teorema de Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-dos-clases-normales-y-estimadores">Paso 2 · Dos clases normales y estimadores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-regla-basada-en-la-razon-de-posteriores">Paso 3 · Regla basada en la razón de posteriores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-cociente-con-verosimilitudes-normales">Paso 4 · Cociente con verosimilitudes normales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-frontera-cuadratica">Paso 5 · Frontera cuadrática</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-frontera-lineal">Paso 6 · Frontera lineal</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -382,51 +408,83 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="verificaciones-de-la-seccion-3-4-2">
-<h1>Verificaciones de la sección 3.4.2<a class="headerlink" href="#verificaciones-de-la-seccion-3-4-2" title="Link to this heading">#</a></h1>
-<section id="las-columnas-de-z-suman-cero">
-<h2>1. Las columnas de <span class="math notranslate nohighlight">\(Z\)</span> suman cero<a class="headerlink" href="#las-columnas-de-z-suman-cero" title="Link to this heading">#</a></h2>
-<p>Esta verificación se pide justo después de (3.8): se debe probar que <span class="math notranslate nohighlight">\(Z^T\mathbf{1}=\mathbf{1}^TZ=\mathbf{0}\)</span>. Sean <span class="math notranslate nohighlight">\(\bar x_j=n^{-1}\sum_{i=1}^n x_{ij}\)</span>, <span class="math notranslate nohighlight">\(s_j&gt;0\)</span> y <span class="math notranslate nohighlight">\(z_{ij}=(x_{ij}-\bar x_j)/s_j\)</span>. La componente <span class="math notranslate nohighlight">\(j\)</span> de <span class="math notranslate nohighlight">\(Z^T\mathbf{1}\)</span>, con <span class="math notranslate nohighlight">\(j=1,\dots,p\)</span>, es la suma de la columna <span class="math notranslate nohighlight">\(j\)</span> de <span class="math notranslate nohighlight">\(Z\)</span>:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="clasificador-bayesiano-seccion-4-1">
+<h1>Clasificador bayesiano (sección 4.1)<a class="headerlink" href="#clasificador-bayesiano-seccion-4-1" title="Link to this heading">#</a></h1>
+<section id="demostracion">
+<h2>Demostración<a class="headerlink" href="#demostracion" title="Link to this heading">#</a></h2>
+<section id="paso-1-teorema-de-bayes">
+<h3>Paso 1 · Teorema de Bayes<a class="headerlink" href="#paso-1-teorema-de-bayes" title="Link to this heading">#</a></h3>
+<p><em>Se usa: definición de condicional y probabilidad total.</em></p>
+<p><span class="math notranslate nohighlight">\(P(G_i)\)</span> es la probabilidad a priori, <span class="math notranslate nohighlight">\(P(G_i\mid D)\)</span> la a posteriori, <span class="math notranslate nohighlight">\(P(D)\)</span> la probabilidad total y <span class="math notranslate nohighlight">\(P(D\mid G_i)\)</span> la condicional del evento. De <span class="math notranslate nohighlight">\(P(G_i\mid D)=P(G_i\cap D)/P(D)\)</span> y <span class="math notranslate nohighlight">\(P(D\mid G_i)=P(G_i\cap D)/P(G_i)\)</span> se obtiene <span class="math notranslate nohighlight">\(P(G_i\cap D)=P(G_i)\,P(D\mid G_i)\)</span>. La partición <span class="math notranslate nohighlight">\(G_1,\dots,G_r\)</span> cubre el espacio con piezas disjuntas, así que <span class="math notranslate nohighlight">\(P(D)=\sum_jP(D\mid G_j)P(G_j)\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[
-(Z^T\mathbf{1})_j=\sum_{i=1}^n z_{ij}=\frac{1}{s_j}\sum_{i=1}^n\left(x_{ij}-\bar x_j\right)=\frac{1}{s_j}\left(n\bar x_j-n\bar x_j\right)=0 .
-\]</div>
-<p>Por tanto <span class="math notranslate nohighlight">\(Z^T\mathbf{1}=\mathbf{0}\)</span> y, al transponer, <span class="math notranslate nohighlight">\(\mathbf{1}^TZ=(Z^T\mathbf{1})^T=\mathbf{0}\)</span>. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
-<p>Esto elimina el término cruzado <span class="math notranslate nohighlight">\(2\beta_0^\star\,\mathbf{1}^TZ\boldsymbol{\beta}_s\)</span> del desarrollo de <span class="math notranslate nohighlight">\(S_\lambda(\beta_0^\star,\boldsymbol{\beta}_s)\)</span> (el que aparece en rojo en la página). Por eso, al derivar respecto a <span class="math notranslate nohighlight">\(\beta_0^\star\)</span> y usar <span class="math notranslate nohighlight">\(\mathbf{1}^T\mathbf{1}=n\)</span> y <span class="math notranslate nohighlight">\(\mathbf{1}^T\boldsymbol{y}=n\bar y\)</span>, solo queda</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial S_\lambda}{\partial\beta_0^\star}=-2n\bar y+2n\beta_0^\star=0 .
-\]</div>
-<p>En el desarrollo de la página aparece «<span class="math notranslate nohighlight">\(2\beta_0\)</span>»; debe ser <span class="math notranslate nohighlight">\(2\beta_0^\star\)</span>.</p>
+\[P(G_i\mid D)=\frac{P(G_i)\,P(D\mid G_i)}{\sum_{j=1}^rP(D\mid G_j)\,P(G_j)}\]</div>
+<p>El denominador no depende de <span class="math notranslate nohighlight">\(i\)</span>; solo normaliza.</p>
 </section>
-<section id="verificacion-de-las-igualdades-3-11">
-<h2>2. Verificación de las igualdades (3.11)<a class="headerlink" href="#verificacion-de-las-igualdades-3-11" title="Link to this heading">#</a></h2>
-<p>Se centra la respuesta, <span class="math notranslate nohighlight">\(y_i\leftarrow y_i-\bar y\)</span>, y se estandarizan los predictores, <span class="math notranslate nohighlight">\(x_{ij}\leftarrow z_{ij}\)</span>. En (3.11) la página usa <span class="math notranslate nohighlight">\(x_{ij}\)</span> para los datos ya estandarizados. Hay que verificar tres igualdades.</p>
-<p><strong>(a) <span class="math notranslate nohighlight">\(\sum_{i=1}^n y_i=0\)</span>.</strong></p>
+<section id="paso-2-dos-clases-normales-y-estimadores">
+<h3>Paso 2 · Dos clases normales y estimadores<a class="headerlink" href="#paso-2-dos-clases-normales-y-estimadores" title="Link to this heading">#</a></h3>
+<p><em>Se usa: máxima verosimilitud.</em></p>
+<p>Con <span class="math notranslate nohighlight">\(n=n_1+n_2\)</span> observaciones, <span class="math notranslate nohighlight">\(G_i:\ x^{(i)}_j\sim N_p(\mu_i,\Sigma_i)\)</span>. Los estimadores de máxima verosimilitud son</p>
 <div class="math notranslate nohighlight">
-\[
-\sum_{i=1}^n(y_i-\bar y)=n\bar y-n\bar y=0 .
-\]</div>
-<p><strong>(b) <span class="math notranslate nohighlight">\(\sum_{i=1}^n x_{ij}=0\)</span>.</strong> Es el cálculo de la sección 1:</p>
-<div class="math notranslate nohighlight">
-\[
-\sum_{i=1}^n z_{ij}=0,\qquad j=1,\dots,p .
-\]</div>
-<p><strong>(c) <span class="math notranslate nohighlight">\(\sum_{i=1}^n x_{ij}^2=n\)</span>.</strong> Se usa <span class="math notranslate nohighlight">\(s_j^2=n^{-1}\sum_{i=1}^n(x_{ij}-\bar x_j)^2\)</span>, la definición de varianza de la página:</p>
-<div class="math notranslate nohighlight">
-\[
-\sum_{i=1}^n z_{ij}^2=\frac{1}{s_j^2}\sum_{i=1}^n\left(x_{ij}-\bar x_j\right)^2=\frac{n\,s_j^2}{s_j^2}=n .\qquad\blacksquare
-\]</div>
-<p>La igualdad (c) vale exactamente porque <span class="math notranslate nohighlight">\(s_j^2\)</span> divide entre <span class="math notranslate nohighlight">\(n\)</span>; con el divisor <span class="math notranslate nohighlight">\(n-1\)</span> se obtendría <span class="math notranslate nohighlight">\(n-1\)</span>.</p>
+\[\begin{split}
+\begin{aligned}
+&amp;\bar x_i=\frac1{n_i}\sum_{j=1}^{n_i}x_j^{(i)},\qquad S_i \\
+&amp;{}=\frac1{n_i}\sum_{j=1}^{n_i}\big(x_j^{(i)}-\bar x_i\big)\big(x_j^{(i)}-\bar x_i\big)^T
+\end{aligned}
+\end{split}\]</div>
 </section>
-<section id="consecuencias">
-<h2>3. Consecuencias<a class="headerlink" href="#consecuencias" title="Link to this heading">#</a></h2>
-<p>Como <span class="math notranslate nohighlight">\(\hat\beta_0^\star=\bar y\)</span> y la respuesta ya está centrada, <span class="math notranslate nohighlight">\(\bar y=0\)</span> y por tanto <span class="math notranslate nohighlight">\(\hat\beta_0^\star=0\)</span>. Se puede trabajar sin intercepto con <span class="math notranslate nohighlight">\(\boldsymbol{y}=X\boldsymbol{\beta}+\boldsymbol{\varepsilon}\)</span>, que es lo que usa la página a continuación. Además, la igualdad (c) da</p>
+<section id="paso-3-regla-basada-en-la-razon-de-posteriores">
+<h3>Paso 3 · Regla basada en la razón de posteriores<a class="headerlink" href="#paso-3-regla-basada-en-la-razon-de-posteriores" title="Link to this heading">#</a></h3>
+<p><em>Se usa: el logaritmo es estrictamente creciente.</em></p>
 <div class="math notranslate nohighlight">
-\[
-\operatorname{diag}(X^TX)=n\,\mathbf{1},
-\]</div>
-<p>que se usa en el caso ortogonal y en el descenso por coordenadas de lasso (<a class="reference internal" href="03_lasso_lars.html"><span class="doc">capítulo 3</span></a>).</p>
+\[\begin{split}\frac{P(G_1\mid x)}{P(G_2\mid x)}\ \begin{cases}\ge1 &amp; x\in G_1\\ \lt1 &amp; x\in G_2\end{cases}\qquad\Longleftrightarrow\qquad \log\frac{P(G_1\mid x)}{P(G_2\mid x)}\ \begin{cases}\ge0 &amp; x\in G_1\\ \lt0 &amp; x\in G_2\end{cases}\end{split}\]</div>
+</section>
+<section id="paso-4-cociente-con-verosimilitudes-normales">
+<h3>Paso 4 · Cociente con verosimilitudes normales<a class="headerlink" href="#paso-4-cociente-con-verosimilitudes-normales" title="Link to this heading">#</a></h3>
+<p><em>Se usa: los denominadores se cancelan.</em></p>
+<p>Ambas posteriores comparten el denominador <span class="math notranslate nohighlight">\(P(x)\)</span>, así que se cancela. Con <span class="math notranslate nohighlight">\(P(x\mid G_i)=f(x\mid\bar x_i,S_i)\)</span> y a priori iguales, <span class="math notranslate nohighlight">\(P(G_1)=P(G_2)=0{,}5\)</span>, también se cancelan:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\frac{P(G_1\mid x)}{P(G_2\mid x)}=\frac{f(x\mid\bar x_1,S_1)\,P(G_1)}{f(x\mid\bar x_2,S_2)\,P(G_2)} \\
+&amp;{}=\frac{f(x\mid\bar x_1,S_1)}{f(x\mid\bar x_2,S_2)}
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}e^{h(x)}=\frac{f(x\mid\bar x_1,S_1)}{f(x\mid\bar x_2,S_2)}\ \Rightarrow\ h(x)=\log\frac{f(x\mid\bar x_1,S_1)}{f(x\mid\bar x_2,S_2)}\ \begin{cases}\ge0&amp;x\in G_1\\ \lt0&amp;x\in G_2\end{cases}\end{split}\]</div>
+<p>Con a priori distintas, el umbral pasa a ser <span class="math notranslate nohighlight">\(\log(P(G_2)/P(G_1))\)</span>.</p>
+</section>
+<section id="paso-5-frontera-cuadratica">
+<h3>Paso 5 · Frontera cuadrática<a class="headerlink" href="#paso-5-frontera-cuadratica" title="Link to this heading">#</a></h3>
+<p><em>Se usa: logaritmo de la densidad normal.</em></p>
+<p>La densidad es <span class="math notranslate nohighlight">\(f(x\mid\bar x_i,S_i)=\dfrac{1}{(2\pi)^{p/2}|S_i|^{1/2}}\exp\!\big[-\tfrac12(x-\bar x_i)^TS_i^{-1}(x-\bar x_i)\big]\)</span>. Sea <span class="math notranslate nohighlight">\(Q_i=(x-\bar x_i)^TS_i^{-1}(x-\bar x_i)\)</span>. Al restar los logaritmos, <span class="math notranslate nohighlight">\(\tfrac p2\log2\pi\)</span> se cancela:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;h(x)=-\tfrac12\log|S_1|-\tfrac12Q_1+\tfrac12\log|S_2|+\tfrac12Q_2 \\
+&amp;{}=\tfrac12\Big[Q_2-Q_1-\log\frac{|S_1|}{|S_2|}\Big]
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-6-frontera-lineal">
+<h3>Paso 6 · Frontera lineal<a class="headerlink" href="#paso-6-frontera-lineal" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(S_1=S_2=S\)</span>, <span class="math notranslate nohighlight">\(S^{-1}\)</span> simétrica.</em></p>
+<p>Con covarianza conjunta <span class="math notranslate nohighlight">\(S=(n_1S_1+n_2S_2)/n\)</span> (la misma para las dos clases), <span class="math notranslate nohighlight">\(\log(|S_1|/|S_2|)=0\)</span>. En <span class="math notranslate nohighlight">\(Q_2-Q_1\)</span> el término <span class="math notranslate nohighlight">\(x^TS^{-1}x\)</span> se cancela, y como <span class="math notranslate nohighlight">\(x^TS^{-1}m=m^TS^{-1}x\)</span> los términos cruzados se agrupan.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;h(x)=\tfrac12\Big[(x-\bar x_2)^TS^{-1}(x-\bar x_2)-(x-\bar x_1)^TS^{-1}(x-\bar x_1)\Big] \\
+&amp;{}=\tfrac12\Big[2(\bar x_1-\bar x_2)^TS^{-1}x+\bar x_2^TS^{-1}\bar x_2-\bar x_1^TS^{-1}\bar x_1\Big]
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;h(x)=\underbrace{(\bar x_1-\bar x_2)^TS^{-1}}_{w^T}\,x+\underbrace{\tfrac12\big(\bar x_2^TS^{-1}\bar x_2-\bar x_1^TS^{-1}\bar x_1\big)}_{w_0} \\
+&amp;{}=w^Tx+w_0 \qquad\blacksquare
+\end{aligned}
+\end{split}\]</div>
+<p>Equivalente: <span class="math notranslate nohighlight">\(h(x)=(\bar x_1-\bar x_2)^TS^{-1}\big(x-\tfrac{\bar x_1+\bar x_2}{2}\big)\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -461,20 +519,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="lasso_lars.html"
        title="página anterior">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">anterior</p>
-        <p class="prev-next-title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+        <p class="prev-next-title">Lasso y algoritmo LARS</p>
       </div>
     </a>
     <a class="right-next"
-       href="02_ridge.html"
+       href="regla_optima_bayes.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">Propiedades del estimador ridge (3.12)</p>
+        <p class="prev-next-title">Regla óptima de Bayes</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -496,9 +554,15 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#las-columnas-de-z-suman-cero">1. Las columnas de <span class="math notranslate nohighlight">\(Z\)</span> suman cero</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verificacion-de-las-igualdades-3-11">2. Verificación de las igualdades (3.11)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consecuencias">3. Consecuencias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-teorema-de-bayes">Paso 1 · Teorema de Bayes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-dos-clases-normales-y-estimadores">Paso 2 · Dos clases normales y estimadores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-regla-basada-en-la-razon-de-posteriores">Paso 3 · Regla basada en la razón de posteriores</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-cociente-con-verosimilitudes-normales">Paso 4 · Cociente con verosimilitudes normales</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-frontera-cuadratica">Paso 5 · Frontera cuadrática</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-frontera-lineal">Paso 6 · Frontera lineal</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

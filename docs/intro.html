@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Demostraciones de regresión ridge, lasso y regla óptima de Bayes &#8212; Demostraciones de regresión ridge, lasso y regla óptima de Bayes</title>
+    <title>Machine Learning: demostraciones &#8212; Machine Learning: demostraciones</title>
   
   
   
@@ -67,7 +67,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Verificaciones de la sección 3.4.2" href="01_verificaciones.html" />
+    <link rel="next" title="Lema 2.1: cota del error de 1-NN" href="lema_21.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -197,7 +197,7 @@
   
   
   
-    <p class="title logo__title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+    <p class="title logo__title">Machine Learning: demostraciones</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -213,16 +213,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+                    Machine Learning: demostraciones
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_verificaciones.html">Verificaciones de la sección 3.4.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_ridge.html">Propiedades del estimador ridge (3.12)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_lasso_lars.html">Estimación lasso y algoritmo LARS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_bayes.html">Verificación de la regla óptima de Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Apéndice: código de verificación numérica</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Vecino más cercano</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lema_21.html">Lema 2.1: cota del error de 1-NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lema_22.html">Lema 2.2: masa de las celdas no visitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Regresión regularizada</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ridge.html">Regresión ridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso_lars.html">Lasso y algoritmo LARS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Clasificación bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bayes_41.html">Clasificador bayesiano (sección 4.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regla_optima_bayes.html">Regla óptima de Bayes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Boosting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adaboost_53.html">AdaBoost (sección 5.3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Máquinas de vectores de soporte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svr_613.html">Regresión SVR con tubo <span class="math notranslate nohighlight">\(\varepsilon\)</span> (sección 6.13)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Anexo: verificación numérica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
 </ul>
 
@@ -359,7 +379,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Demostraciones de regresión ridge, lasso y regla óptima de Bayes</h1>
+    <h1>Machine Learning: demostraciones</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -369,7 +389,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-contiene-este-libro">Qué contiene este libro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenciones">Convenciones</a></li>
 </ul>
             </nav>
@@ -382,51 +402,77 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="demostraciones-de-regresion-ridge-lasso-y-regla-optima-de-bayes">
-<h1>Demostraciones de regresión ridge, lasso y regla óptima de Bayes<a class="headerlink" href="#demostraciones-de-regresion-ridge-lasso-y-regla-optima-de-bayes" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-demostraciones">
+<h1>Machine Learning: demostraciones<a class="headerlink" href="#machine-learning-demostraciones" title="Link to this heading">#</a></h1>
 <p><strong>Autores:</strong> Lina Buelvas y Camilo Molina</p>
-<p><strong>Curso:</strong> Aprendizaje Automático (doctorado)</p>
-<section id="que-contiene-este-libro">
-<h2>Qué contiene este libro<a class="headerlink" href="#que-contiene-este-libro" title="Link to this heading">#</a></h2>
-<p>Este libro reúne, en un solo documento, las demostraciones que las notas del curso dejan «para el lector» en la regresión ridge y lasso, y la verificación de la regla óptima de Bayes. Cada capítulo es autocontenido y todas las fórmulas están escritas en notación matemática.</p>
+<p><strong>Curso:</strong> Machine Learning (doctorado)</p>
+<p>Este libro reúne las demostraciones de las notas del curso. Cada una se presenta igual: primero el <strong>enunciado</strong>, luego una serie de <strong>pasos numerados</strong>, y en cada paso se indica la propiedad que se usa. Todas las fórmulas están escritas en notación matemática y el final de cada demostración se marca con <span class="math notranslate nohighlight">\(\blacksquare\)</span>.</p>
+<section id="contenido">
+<h2>Contenido<a class="headerlink" href="#contenido" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-left"><p>Capítulo</p></th>
-<th class="head text-left"><p>Contenido</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Sección de las notas</p></th>
+<th class="head text-left"><p>Capítulo</p></th>
+<th class="head text-left"><p>Resultado que se demuestra</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="01_verificaciones.html"><span class="doc">1. Verificaciones de la sección 3.4.2</span></a></p></td>
-<td class="text-left"><p><span class="math notranslate nohighlight">\(Z^T\mathbf{1}=\mathbf{1}^TZ=\mathbf{0}\)</span> y las igualdades (3.11) («verifíquelo», «verifíquelas»)</p></td>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><a class="reference internal" href="lema_21.html"><span class="doc">Lema 2.1</span></a></p></td>
+<td class="text-left"><p>Cota del error esperado de 1-NN: <span class="math notranslate nohighlight">\(\mathbb{E}[L_{\mathcal D}(h_S)]\le 2L_{\mathcal D}(h^\star)+c\,\mathbb{E}|x-x'|\)</span></p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="02_ridge.html"><span class="doc">2. Propiedades del estimador ridge</span></a></p></td>
-<td class="text-left"><p>Esperanza, covarianza, sesgo y error cuadrático medio, ecuación (3.12) (ejercicio de la sección 3.4.2)</p></td>
+<tr class="row-odd"><td class="text-left"><p>2</p></td>
+<td class="text-left"><p><a class="reference internal" href="lema_22.html"><span class="doc">Lema 2.2</span></a></p></td>
+<td class="text-left"><p>Masa de las celdas no visitadas: <span class="math notranslate nohighlight">\(\mathbb{E}\big[\sum_{C_i\cap S=\emptyset}P(C_i)\big]\le r/(me)\)</span></p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="03_lasso_lars.html"><span class="doc">3. Estimación lasso y LARS</span></a></p></td>
-<td class="text-left"><p>Condiciones KKT, umbralización suave, descenso por coordenadas y algoritmo LARS (ejercicio de la sección 3.5)</p></td>
+<tr class="row-even"><td class="text-left"><p>3.4 y 3.12</p></td>
+<td class="text-left"><p><a class="reference internal" href="ridge.html"><span class="doc">Regresión ridge</span></a></p></td>
+<td class="text-left"><p>Estimador ridge, esperanza, covarianza, sesgo y error cuadrático medio</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="04_bayes.html"><span class="doc">4. Regla óptima de Bayes</span></a></p></td>
-<td class="text-left"><p>Desigualdad (A) e igualdad (B) para la pérdida esperada <span class="math notranslate nohighlight">\(L_D(h^\star)\)</span></p></td>
+<tr class="row-odd"><td class="text-left"><p>3.5</p></td>
+<td class="text-left"><p><a class="reference internal" href="lasso_lars.html"><span class="doc">Lasso y LARS</span></a></p></td>
+<td class="text-left"><p>Condiciones KKT, umbralización suave, descenso por coordenadas y LARS</p></td>
 </tr>
-<tr class="row-even"><td class="text-left"><p><a class="reference internal" href="apendice_codigo.html"><span class="doc">Apéndice: código</span></a></p></td>
-<td class="text-left"><p>Script en Python de la verificación numérica de LARS y su salida</p></td>
+<tr class="row-even"><td class="text-left"><p>4.1</p></td>
+<td class="text-left"><p><a class="reference internal" href="bayes_41.html"><span class="doc">Clasificador bayesiano</span></a></p></td>
+<td class="text-left"><p>Frontera cuadrática y frontera lineal para dos clases normales</p></td>
 </tr>
-<tr class="row-odd"><td class="text-left"><p><a class="reference internal" href="referencias.html"><span class="doc">Referencias</span></a></p></td>
-<td class="text-left"><p>Bibliografía</p></td>
+<tr class="row-odd"><td class="text-left"><p>4</p></td>
+<td class="text-left"><p><a class="reference internal" href="regla_optima_bayes.html"><span class="doc">Regla óptima de Bayes</span></a></p></td>
+<td class="text-left"><p>Desigualdad (A) e igualdad (B) para <span class="math notranslate nohighlight">\(L_{\mathcal D}(h^\star)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>5.3</p></td>
+<td class="text-left"><p><a class="reference internal" href="adaboost_53.html"><span class="doc">AdaBoost</span></a></p></td>
+<td class="text-left"><p>Elección de <span class="math notranslate nohighlight">\(\theta_i\)</span>, <span class="math notranslate nohighlight">\(\alpha_i\)</span> y actualización de pesos</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>6.13</p></td>
+<td class="text-left"><p><a class="reference internal" href="svr_613.html"><span class="doc">Regresión SVR</span></a></p></td>
+<td class="text-left"><p>Primal, Lagrangiano, dual de Wolfe y truco del núcleo</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>El <a class="reference internal" href="apendice_codigo.html"><span class="doc">anexo</span></a> contiene la comprobación numérica de los resultados y las <a class="reference internal" href="referencias.html"><span class="doc">referencias</span></a> la bibliografía.</p>
 </section>
 <section id="convenciones">
 <h2>Convenciones<a class="headerlink" href="#convenciones" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las referencias del tipo (3.12), «sección 3.5» o «Ejercicio 1 de la sección 3.6» remiten a la numeración de las notas del curso (véase <a class="reference internal" href="referencias.html"><span class="doc">Referencias</span></a>).</p></li>
 <li><p>Los vectores y las matrices se escriben en negrita o con mayúscula (<span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>, <span class="math notranslate nohighlight">\(X\)</span>); <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}\)</span> denota un estimador.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbb{E}\)</span> es la esperanza, <span class="math notranslate nohighlight">\(\operatorname{Cov}\)</span> la matriz de covarianza, <span class="math notranslate nohighlight">\(\operatorname{tr}\)</span> la traza y <span class="math notranslate nohighlight">\(\blacksquare\)</span> marca el final de una demostración.</p></li>
-<li><p>Se señalan dos erratas de notación de las notas: en el desarrollo de <span class="math notranslate nohighlight">\(S_\lambda\)</span> aparece <span class="math notranslate nohighlight">\(2\beta_0\)</span> en lugar de <span class="math notranslate nohighlight">\(2\beta_0^\star\)</span> (capítulo 1), y en (3.12) aparece <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{\beta}_R)\)</span> en lugar de <span class="math notranslate nohighlight">\(\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)\)</span> (capítulo 2).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{E}\)</span> es la esperanza, <span class="math notranslate nohighlight">\(\operatorname{Cov}\)</span> la matriz de covarianza y <span class="math notranslate nohighlight">\(\operatorname{tr}\)</span> la traza.</p></li>
+<li><p>Las notas contienen dos erratas de notación: en el desarrollo de <span class="math notranslate nohighlight">\(S_\lambda\)</span> aparece <span class="math notranslate nohighlight">\(2\beta_0\)</span> en lugar de <span class="math notranslate nohighlight">\(2\beta_0^\star\)</span>, y en (3.12) aparece <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{\beta}_R)\)</span> en lugar de <span class="math notranslate nohighlight">\(\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)\)</span>. En el libro se escriben corregidas.</p></li>
 </ul>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -462,11 +508,11 @@
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="01_verificaciones.html"
+       href="lema_21.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">Verificaciones de la sección 3.4.2</p>
+        <p class="prev-next-title">Lema 2.1: cota del error de 1-NN</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -488,7 +534,7 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-contiene-este-libro">Qué contiene este libro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">Contenido</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenciones">Convenciones</a></li>
 </ul>
   </nav></div>

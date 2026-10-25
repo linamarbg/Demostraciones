@@ -1,8 +1,8 @@
-# Estimación lasso y algoritmo LARS
+# Lasso y algoritmo LARS
 
 ## 1. Planteamiento
 
-Se trabaja con los datos observados normalizados como en (3.11), verificado en el {doc}`capítulo 1 <01_verificaciones>`: $\sum_i y_i=0$, $\sum_i x_{ij}=0$ y $\sum_i x_{ij}^2=n$. El estimador lasso minimiza
+Se trabaja con los datos observados normalizados como en (3.11), demostrado en el paso 8 de la {doc}`regresión ridge <ridge>`: $\sum_i y_i=0$, $\sum_i x_{ij}=0$ y $\sum_i x_{ij}^2=n$. El estimador lasso minimiza
 
 $$
 S_\lambda(\boldsymbol{\beta})=(\boldsymbol{y}-X\boldsymbol{\beta})^T(\boldsymbol{y}-X\boldsymbol{\beta})+\lambda\sum_{j=1}^{p}|\beta_j|,\qquad \lambda>0 .

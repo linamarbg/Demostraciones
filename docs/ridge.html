@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+
+
+<html lang="es" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regresión ridge &#8212; Machine Learning: demostraciones</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=78d55cf8"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Haz clic para mostrar';</script>
+    <script>let toggleHintHide = 'Haz clic para ocultar';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/translations.js?v=d190bf04"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="_static/../mathjax/tex-mml-chtml.js?v=cadf963e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ridge';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Lasso y algoritmo LARS" href="lasso_lars.html" />
+    <link rel="prev" title="Lema 2.2: masa de las celdas no visitadas" href="lema_22.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="es"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Saltar al contenido principal</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Volver arriba</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Advertencia de versión"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Navegación del sitio">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="En esta página">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Machine Learning: demostraciones</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Búsqueda</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Machine Learning: demostraciones
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Vecino más cercano</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lema_21.html">Lema 2.1: cota del error de 1-NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lema_22.html">Lema 2.2: masa de las celdas no visitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Regresión regularizada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regresión ridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso_lars.html">Lasso y algoritmo LARS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Clasificación bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bayes_41.html">Clasificador bayesiano (sección 4.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regla_optima_bayes.html">Regla óptima de Bayes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Boosting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adaboost_53.html">AdaBoost (sección 5.3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Máquinas de vectores de soporte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svr_613.html">Regresión SVR con tubo <span class="math notranslate nohighlight">\(\varepsilon\)</span> (sección 6.13)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Anexo: verificación numérica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Descarga esta pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ridge.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Descargar archivo fuente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimir en PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Modo de pantalla completa"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Tema" data-bs-title="Tema"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Claro"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Oscuro"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Sistema"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Búsqueda" aria-label="Búsqueda" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regresión ridge</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenido </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-deduccion-del-estimador-seccion-3-4">Parte I. Deducción del estimador (sección 3.4)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-estandarizacion">Paso 1 · Estandarización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-reparametrizacion">Paso 2 · Reparametrización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-verificar-z-t-mathbf-1-0">Paso 3 · Verificar <span class="math notranslate nohighlight">\(Z^T\mathbf 1=0\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-desarrollo-de-s-lambda">Paso 4 · Desarrollo de <span class="math notranslate nohighlight">\(S_\lambda\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-intercepto">Paso 5 · Intercepto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-coeficientes">Paso 6 · Coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-volver-a-la-escala-original">Paso 7 · Volver a la escala original</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-datos-centrados-modelo-sin-intercepto">Paso 8 · Datos centrados: modelo sin intercepto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complemento-por-que-la-inversa-existe-y-el-punto-es-el-minimo">Complemento: por qué la inversa existe y el punto es el mínimo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-propiedades-del-estimador-3-12">Parte II. Propiedades del estimador (3.12)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-0-descomponer-el-estimador">Paso 0 · Descomponer el estimador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-a-esperanza">Paso 1 · (a) Esperanza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-b-covarianza">Paso 2 · (b) Covarianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-c-sesgo">Paso 3 · (c) Sesgo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-d-error-cuadratico-medio">Paso 4 · (d) Error cuadrático medio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comentario-compromiso-sesgo-varianza">Comentario: compromiso sesgo-varianza</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regresion-ridge">
+<h1>Regresión ridge<a class="headerlink" href="#regresion-ridge" title="Link to this heading">#</a></h1>
+<p>Este capítulo deduce el estimador ridge a partir de datos estandarizados (sección 3.4) y demuestra sus propiedades: esperanza, covarianza, sesgo y error cuadrático medio (3.12).</p>
+<section id="parte-i-deduccion-del-estimador-seccion-3-4">
+<h2>Parte I. Deducción del estimador (sección 3.4)<a class="headerlink" href="#parte-i-deduccion-del-estimador-seccion-3-4" title="Link to this heading">#</a></h2>
+<div class="admonition-enunciado admonition">
+<p class="admonition-title">Enunciado</p>
+<p>Con datos estandarizados <span class="math notranslate nohighlight">\(z_{ij}=(x_{ij}-\bar x_j)/s_j\)</span> y <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span>, el minimizador de</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;S_\lambda(\beta_0^\star,\beta_s) \\
+&amp;{}= (y-\beta_0^\star\mathbf 1-Z\beta_s)^T(y-\beta_0^\star\mathbf 1-Z\beta_s)+\lambda\,\beta_s^T\beta_s
+\end{aligned}
+\end{split}\]</div>
+<p>es <span class="math notranslate nohighlight">\(\hat\beta_0^\star=\bar y\)</span> y <span class="math notranslate nohighlight">\(\hat\beta_s=(Z^TZ+\lambda I_p)^{-1}Z^Ty\)</span>.</p>
+</div>
+<section id="paso-1-estandarizacion">
+<h3>Paso 1 · Estandarización<a class="headerlink" href="#paso-1-estandarizacion" title="Link to this heading">#</a></h3>
+<p>Modelo <span class="math notranslate nohighlight">\(y_i=\beta_0+\beta_1x_{i1}+\dots+\beta_px_{ip}+\varepsilon_i\)</span>, <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>. Con</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\bar x_j=\frac1n\sum_{i=1}^n x_{ij},\qquad s_j^2=\frac1n\sum_{i=1}^n (x_{ij}-\bar x_j)^2, \\
+&amp;\qquad z_{ij}=\frac{x_{ij}-\bar x_j}{s_j}\ \Rightarrow\ x_{ij}=\bar x_j+s_j z_{ij}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-2-reparametrizacion">
+<h3>Paso 2 · Reparametrización<a class="headerlink" href="#paso-2-reparametrizacion" title="Link to this heading">#</a></h3>
+<p><em>Se usa: propiedad distributiva.</em></p>
+<p>Se sustituye <span class="math notranslate nohighlight">\(x_{ij}=\bar x_j+s_jz_{ij}\)</span> en el modelo y se agrupan las constantes.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;y_i=\Big(\beta_0+\sum_{j=1}^p\beta_j\bar x_j\Big)+\sum_{j=1}^p(s_j\beta_j)\,z_{ij}+\varepsilon_i \\
+&amp;{}= \beta_0^\star+\sum_{j=1}^p\beta_j^\star z_{ij}+\varepsilon_i, \\
+&amp;\qquad \beta_0^\star=\beta_0+\sum_j\beta_j\bar x_j,\ \ \beta_j^\star=s_j\beta_j
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[y=\beta_0^\star\mathbf 1+Z\beta_s+\varepsilon \qquad (y:n\times1,\ Z:n\times p,\ \beta_s:p\times1)\]</div>
+</section>
+<section id="paso-3-verificar-z-t-mathbf-1-0">
+<h3>Paso 3 · Verificar <span class="math notranslate nohighlight">\(Z^T\mathbf 1=0\)</span><a class="headerlink" href="#paso-3-verificar-z-t-mathbf-1-0" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\sum_i x_{ij}=n\bar x_j\)</span>.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\sum_{i=1}^n z_{ij}=\frac1{s_j}\Big(\sum_{i=1}^n x_{ij}-n\bar x_j\Big) \\
+&amp;{}=\frac1{s_j}\big(n\bar x_j-n\bar x_j\big)=0
+\end{aligned}
+\end{split}\]</div>
+<p>Cada coordenada de <span class="math notranslate nohighlight">\(Z^T\mathbf 1\)</span> es una de esas sumas, así que <span class="math notranslate nohighlight">\(Z^T\mathbf 1=0\)</span>. Al transponer, <span class="math notranslate nohighlight">\(\mathbf 1^TZ=0^T\)</span>.</p>
+</section>
+<section id="paso-4-desarrollo-de-s-lambda">
+<h3>Paso 4 · Desarrollo de <span class="math notranslate nohighlight">\(S_\lambda\)</span><a class="headerlink" href="#paso-4-desarrollo-de-s-lambda" title="Link to this heading">#</a></h3>
+<p><em>Se usa: un escalar es igual a su transpuesta.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+S_\lambda&amp;=y^Ty-2\beta_0^\star\,y^T\mathbf 1-2y^TZ\beta_s+2\beta_0^\star\,\mathbf 1^TZ\beta_s\\
+&amp;\quad+\beta_s^TZ^TZ\beta_s+n(\beta_0^\star)^2+\lambda\beta_s^T\beta_s
+\end{aligned}
+\end{split}\]</div>
+<p>Se usó <span class="math notranslate nohighlight">\(\mathbf 1^T\mathbf 1=n\)</span>. Por el paso 3, <span class="math notranslate nohighlight">\(\mathbf 1^TZ=0^T\)</span>, así que el término cruzado <span class="math notranslate nohighlight">\(2\beta_0^\star\,\mathbf 1^TZ\beta_s\)</span> se anula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+S_\lambda&amp;=y^Ty-2\beta_0^\star\,y^T\mathbf 1-2y^TZ\beta_s\\
+&amp;\quad+\beta_s^T(Z^TZ+\lambda I)\beta_s+n(\beta_0^\star)^2
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-5-intercepto">
+<h3>Paso 5 · Intercepto<a class="headerlink" href="#paso-5-intercepto" title="Link to this heading">#</a></h3>
+<p><em>Se usa: derivada e igualdad a cero.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\frac{\partial S_\lambda}{\partial\beta_0^\star}=-2y^T\mathbf 1+2n\beta_0^\star=0\ \\
+&amp;\Rightarrow\ n\beta_0^\star=y^T\mathbf 1=\sum_i y_i=n\bar y\ \Rightarrow\ \hat\beta_0^\star=\bar y
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-6-coeficientes">
+<h3>Paso 6 · Coeficientes<a class="headerlink" href="#paso-6-coeficientes" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\partial(x^TAx)/\partial x=(A+A^T)x=2Ax\)</span> si <span class="math notranslate nohighlight">\(A=A^T\)</span>.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\frac{\partial S_\lambda}{\partial\beta_s}=-2Z^Ty+2Z^TZ\beta_s+2\lambda\beta_s=0\ \\
+&amp;\Rightarrow\ (Z^TZ+\lambda I_p)\beta_s=Z^Ty\ \Rightarrow\ \hat\beta_s=(Z^TZ+\lambda I_p)^{-1}Z^Ty
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-7-volver-a-la-escala-original">
+<h3>Paso 7 · Volver a la escala original<a class="headerlink" href="#paso-7-volver-a-la-escala-original" title="Link to this heading">#</a></h3>
+<p>De <span class="math notranslate nohighlight">\(\beta_0^\star=\beta_0+\sum_j\beta_j\bar x_j\)</span>, <span class="math notranslate nohighlight">\(\beta_j^\star=s_j\beta_j\)</span> y <span class="math notranslate nohighlight">\(\hat\beta_0^\star=\bar y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\hat\beta_j=\frac{\hat\beta_j^\star}{s_j},\qquad \hat\beta_0=\bar y-\sum_{j=1}^p\hat\beta_j\bar x_j\]</div>
+</section>
+<section id="paso-8-datos-centrados-modelo-sin-intercepto">
+<h3>Paso 8 · Datos centrados: modelo sin intercepto<a class="headerlink" href="#paso-8-datos-centrados-modelo-sin-intercepto" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\sum y^c_i=0,\ \sum x_{ij}=0,\ \sum x_{ij}^2=n\)</span>.</em></p>
+<p>Con <span class="math notranslate nohighlight">\(y_i^c=y_i-\bar y\)</span> se verifica <span class="math notranslate nohighlight">\(\sum_i y_i^c=\sum_i y_i-n\bar y=0\)</span>. Con <span class="math notranslate nohighlight">\(z_{ij}\)</span> en lugar de <span class="math notranslate nohighlight">\(x_{ij}\)</span>, <span class="math notranslate nohighlight">\(\sum_i z_{ij}=0\)</span> (paso 3) y, como <span class="math notranslate nohighlight">\(s_j^2=\tfrac1n\sum_i(x_{ij}-\bar x_j)^2\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n z_{ij}^2=\frac1{s_j^2}\sum_{i=1}^n(x_{ij}-\bar x_j)^2=\frac{n\,s_j^2}{s_j^2}=n\]</div>
+<p>Como <span class="math notranslate nohighlight">\(\hat\beta_0^\star=\bar y\)</span>, el modelo para <span class="math notranslate nohighlight">\(y^c\)</span> no lleva intercepto, y se escribe sin perder generalidad <span class="math notranslate nohighlight">\(y=X\beta+\varepsilon\)</span> con <span class="math notranslate nohighlight">\(X\)</span> centrada. La función objetivo es</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;S_\lambda(\beta)=(y-X\beta)^T(y-X\beta)+\lambda\beta^T\beta \\
+&amp;{}=y^Ty-2\beta^TX^Ty+\beta^T(X^TX+\lambda I)\beta
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\frac{\partial S_\lambda}{\partial\beta}=-2X^Ty+2X^TX\beta+2\lambda\beta \\
+&amp;{}=0\ \Rightarrow\ \hat\beta_R=(X^TX+\lambda I_p)^{-1}X^Ty \qquad\blacksquare
+\end{aligned}
+\end{split}\]</div>
+<p>Una consecuencia que se usa en lasso (<a class="reference internal" href="lasso_lars.html"><span class="doc">Lasso y algoritmo LARS</span></a>): como <span class="math notranslate nohighlight">\(\sum_i x_{ij}^2=n\)</span>, se tiene <span class="math notranslate nohighlight">\(\operatorname{diag}(X^TX)=n\,\mathbf 1\)</span>.</p>
+</section>
+<section id="complemento-por-que-la-inversa-existe-y-el-punto-es-el-minimo">
+<h3>Complemento: por qué la inversa existe y el punto es el mínimo<a class="headerlink" href="#complemento-por-que-la-inversa-existe-y-el-punto-es-el-minimo" title="Link to this heading">#</a></h3>
+<p>Con <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span>, <span class="math notranslate nohighlight">\(A=Z^TZ+\lambda I\)</span> es simétrica y definida positiva: <span class="math notranslate nohighlight">\(v^TAv=\|Zv\|^2+\lambda\|v\|^2&gt;0\)</span> si <span class="math notranslate nohighlight">\(v\ne0\)</span>. Por eso existe <span class="math notranslate nohighlight">\(A^{-1}\)</span> aunque <span class="math notranslate nohighlight">\(Z^TZ\)</span> sea singular. Completando el cuadrado,</p>
+<div class="math notranslate nohighlight">
+\[\beta_s^TA\beta_s-2b^T\beta_s=(\beta_s-A^{-1}b)^TA(\beta_s-A^{-1}b)-b^TA^{-1}b,\qquad b=Z^Ty,\]</div>
+<p>y el primer término es <span class="math notranslate nohighlight">\(\ge0\)</span> con igualdad solo en <span class="math notranslate nohighlight">\(\beta_s=A^{-1}b\)</span>. Es el único mínimo global.</p>
+</section>
+</section>
+<section id="parte-ii-propiedades-del-estimador-3-12">
+<h2>Parte II. Propiedades del estimador (3.12)<a class="headerlink" href="#parte-ii-propiedades-del-estimador-3-12" title="Link to this heading">#</a></h2>
+<div class="admonition-enunciado admonition">
+<p class="admonition-title">Enunciado</p>
+<p>Con <span class="math notranslate nohighlight">\(y=X\beta+\varepsilon\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(\varepsilon)=0\)</span>, <span class="math notranslate nohighlight">\(\operatorname{Cov}(\varepsilon)=\sigma^2I_n\)</span> y <span class="math notranslate nohighlight">\(A=X^TX+\lambda I_p\)</span>, se tiene <span class="math notranslate nohighlight">\(\hat\beta_R=A^{-1}X^Ty\)</span> y:</p>
+<p>(a) <span class="math notranslate nohighlight">\(\mathbb{E}(\hat\beta_R)=A^{-1}X^TX\beta\)</span> · (b) <span class="math notranslate nohighlight">\(\operatorname{Cov}(\hat\beta_R)=\sigma^2A^{-1}X^TXA^{-1}\)</span> · (c) sesgo <span class="math notranslate nohighlight">\(=-\lambda A^{-1}\beta\)</span> · (d) <span class="math notranslate nohighlight">\(\mathbb{E}\|\hat\beta_R-\beta\|^2=\sigma^2\sum_j\dfrac{l_j}{(l_j+\lambda)^2}+\lambda^2\beta^TA^{-2}\beta\)</span></p>
+</div>
+<p>En esta parte <span class="math notranslate nohighlight">\(X\)</span> es la matriz de datos centrada y estandarizada de la Parte I (paso 8), así que el modelo no lleva intercepto.</p>
+<section id="paso-0-descomponer-el-estimador">
+<h3>Paso 0 · Descomponer el estimador<a class="headerlink" href="#paso-0-descomponer-el-estimador" title="Link to this heading">#</a></h3>
+<p><em>Se usa: distributiva.</em></p>
+<div class="math notranslate nohighlight">
+\[\hat\beta_R=A^{-1}X^T(X\beta+\varepsilon)=A^{-1}X^TX\beta+A^{-1}X^T\varepsilon\]</div>
+<p>El primer sumando es constante; el aleatorio es <span class="math notranslate nohighlight">\(A^{-1}X^T\varepsilon\)</span>.</p>
+</section>
+<section id="paso-1-a-esperanza">
+<h3>Paso 1 · (a) Esperanza<a class="headerlink" href="#paso-1-a-esperanza" title="Link to this heading">#</a></h3>
+<p><em>Se usa: linealidad; <span class="math notranslate nohighlight">\(\mathbb{E}(\varepsilon)=0\)</span>.</em></p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}(\hat\beta_R)=A^{-1}X^TX\beta+A^{-1}X^T\,\mathbb{E}(\varepsilon)=A^{-1}X^TX\beta\]</div>
+</section>
+<section id="paso-2-b-covarianza">
+<h3>Paso 2 · (b) Covarianza<a class="headerlink" href="#paso-2-b-covarianza" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\operatorname{Cov}(M\varepsilon)=M\operatorname{Cov}(\varepsilon)M^T\)</span>; una constante no aporta covarianza.</em></p>
+<p>Con <span class="math notranslate nohighlight">\(M=A^{-1}X^T\)</span> y <span class="math notranslate nohighlight">\(A\)</span> simétrica, <span class="math notranslate nohighlight">\(M^T=XA^{-1}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\operatorname{Cov}(\hat\beta_R)=A^{-1}X^T\,(\sigma^2I_n)\,XA^{-1} \\
+&amp;{}=\sigma^2A^{-1}X^TXA^{-1}=\sigma^2(X^TX+\lambda I_p)^{-1}X^TX(X^TX+\lambda I_p)^{-1}
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-3-c-sesgo">
+<h3>Paso 3 · (c) Sesgo<a class="headerlink" href="#paso-3-c-sesgo" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(X^TX=A-\lambda I\)</span>.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\mathbb{E}(\hat\beta_R)-\beta=\big(A^{-1}X^TX-I\big)\beta=A^{-1}\big(X^TX-A\big)\beta \\
+&amp;{}=-\lambda A^{-1}\beta=-\lambda(X^TX+\lambda I_p)^{-1}\beta
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="paso-4-d-error-cuadratico-medio">
+<h3>Paso 4 · (d) Error cuadrático medio<a class="headerlink" href="#paso-4-d-error-cuadratico-medio" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\mathbb{E}\|v\|^2=\operatorname{tr}\operatorname{Cov}(v)+\|\mathbb{E}v\|^2\)</span>.</em></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\mathbb{E}\big[(\hat\beta_R-\beta)^T(\hat\beta_R-\beta)\big] \\
+&amp;{}=\operatorname{tr}\big(\operatorname{Cov}(\hat\beta_R)\big)+\big\|\mathbb{E}\hat\beta_R-\beta\big\|^2
+\end{aligned}
+\end{split}\]</div>
+<p>Sea <span class="math notranslate nohighlight">\(X^TX=Q\,\mathrm{diag}(l_1,\dots,l_p)\,Q^T\)</span> con <span class="math notranslate nohighlight">\(Q\)</span> ortogonal. Entonces <span class="math notranslate nohighlight">\(A^{-1}=Q\,\mathrm{diag}\big(\tfrac1{l_j+\lambda}\big)Q^T\)</span> y, por la propiedad cíclica de la traza,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\operatorname{tr}\big(\sigma^2A^{-1}X^TXA^{-1}\big)=\sigma^2\sum_{j=1}^p\frac{l_j}{(l_j+\lambda)^2}, \\
+&amp;\qquad \|{-\lambda}A^{-1}\beta\|^2=\lambda^2\beta^TA^{-2}\beta
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\mathbb{E}\|\hat\beta_R-\beta\|^2 \\
+&amp;{}=\sigma^2\sum_{j=1}^p\frac{l_j}{(l_j+\lambda)^2}+\lambda^2\beta^T(X^TX+\lambda I_p)^{-2}\beta \\
+&amp;\qquad\blacksquare
+\end{aligned}
+\end{split}\]</div>
+</section>
+<section id="comentario-compromiso-sesgo-varianza">
+<h3>Comentario: compromiso sesgo-varianza<a class="headerlink" href="#comentario-compromiso-sesgo-varianza" title="Link to this heading">#</a></h3>
+<p>La varianza decrece con <span class="math notranslate nohighlight">\(\lambda\)</span>, porque cada sumando <span class="math notranslate nohighlight">\(l_j/(l_j+\lambda)^2\)</span> disminuye; el sesgo al cuadrado crece con <span class="math notranslate nohighlight">\(\lambda\)</span>. Si algún <span class="math notranslate nohighlight">\(l_j\)</span> es muy pequeño (multicolinealidad), el término <span class="math notranslate nohighlight">\(\sigma^2\sum_j 1/l_j\)</span> de mínimos cuadrados explota, mientras que ridge lo mantiene acotado.</p>
+<div class="admonition-nota-de-notacion admonition">
+<p class="admonition-title">Nota de notación</p>
+<p>En las notas aparece <span class="math notranslate nohighlight">\(\operatorname{Cov}(\beta_R)\)</span> donde debe ir <span class="math notranslate nohighlight">\(\operatorname{Cov}(\hat\beta_R)\)</span>.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lema_22.html"
+       title="página anterior">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Lema 2.2: masa de las celdas no visitadas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lasso_lars.html"
+       title="siguiente página">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">siguiente</p>
+        <p class="prev-next-title">Lasso y algoritmo LARS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenido
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-deduccion-del-estimador-seccion-3-4">Parte I. Deducción del estimador (sección 3.4)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-estandarizacion">Paso 1 · Estandarización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-reparametrizacion">Paso 2 · Reparametrización</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-verificar-z-t-mathbf-1-0">Paso 3 · Verificar <span class="math notranslate nohighlight">\(Z^T\mathbf 1=0\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-desarrollo-de-s-lambda">Paso 4 · Desarrollo de <span class="math notranslate nohighlight">\(S_\lambda\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-intercepto">Paso 5 · Intercepto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-coeficientes">Paso 6 · Coeficientes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-volver-a-la-escala-original">Paso 7 · Volver a la escala original</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-datos-centrados-modelo-sin-intercepto">Paso 8 · Datos centrados: modelo sin intercepto</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complemento-por-que-la-inversa-existe-y-el-punto-es-el-minimo">Complemento: por qué la inversa existe y el punto es el mínimo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-propiedades-del-estimador-3-12">Parte II. Propiedades del estimador (3.12)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-0-descomponer-el-estimador">Paso 0 · Descomponer el estimador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-a-esperanza">Paso 1 · (a) Esperanza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-b-covarianza">Paso 2 · (b) Covarianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-c-sesgo">Paso 3 · (c) Sesgo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-d-error-cuadratico-medio">Paso 4 · (d) Error cuadrático medio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comentario-compromiso-sesgo-varianza">Comentario: compromiso sesgo-varianza</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Por Lina Buelvas y Camilo Molina
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

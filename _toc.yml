@@ -1,9 +1,25 @@
 format: jb-book
 root: intro
-chapters:
-  - file: 01_verificaciones
-  - file: 02_ridge
-  - file: 03_lasso_lars
-  - file: 04_bayes
-  - file: apendice_codigo
-  - file: referencias
+parts:
+  - caption: 2. Vecino más cercano
+    chapters:
+      - file: lema_21
+      - file: lema_22
+  - caption: 3. Regresión regularizada
+    chapters:
+      - file: ridge
+      - file: lasso_lars
+  - caption: 4. Clasificación bayesiana
+    chapters:
+      - file: bayes_41
+      - file: regla_optima_bayes
+  - caption: 5. Boosting
+    chapters:
+      - file: adaboost_53
+  - caption: 6. Máquinas de vectores de soporte
+    chapters:
+      - file: svr_613
+  - caption: Anexos
+    chapters:
+      - file: apendice_codigo
+      - file: referencias

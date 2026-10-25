@@ -1,0 +1,13 @@
+Lema 2.1  max |identidad|        = 1.1102230246251565e-16
+Lema 2.1  2n(1-n) <= 2 min{n,1-n} = True
+Lema 2.2  Monte Carlo = 0.0358  exacto = 0.0358  cota r/(m e) = 0.1104
+Ridge     ECM Monte Carlo = 0.1532  formula (3.12) = 0.1531
+Ridge     sesgo MC - formula = 0.0
+Bayes 4.1 |h - (w'x + w0)|        = 4.961309141293668e-16
+Bayes 4.1 |h - cuadratica|        = 4.440892098500626e-16
+AdaBoost  alpha numerico = 0.4129  alpha_i = 0.4129
+AdaBoost  Z = 0.920431  2 sqrt(P(1-P)) = 0.920431
+AdaBoost  peso de mal clasificados = 0.5
+SVR       primal = 5.568999  dual = 5.568999
+SVR       theta primal = [ 1.5195 -1.8013]  theta desde el dual = [ 1.5195 -1.8013]
+SVR       max lt*l (holgura complementaria) = 0.0

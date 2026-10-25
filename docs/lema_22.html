@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Propiedades del estimador ridge (3.12) &#8212; Demostraciones de regresión ridge, lasso y regla óptima de Bayes</title>
+    <title>Lema 2.2: masa de las celdas no visitadas &#8212; Machine Learning: demostraciones</title>
   
   
   
@@ -63,12 +63,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="_static/../mathjax/tex-mml-chtml.js?v=cadf963e"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '02_ridge';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lema_22';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Estimación lasso y algoritmo LARS" href="03_lasso_lars.html" />
-    <link rel="prev" title="Verificaciones de la sección 3.4.2" href="01_verificaciones.html" />
+    <link rel="next" title="Regresión ridge" href="ridge.html" />
+    <link rel="prev" title="Lema 2.1: cota del error de 1-NN" href="lema_21.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -196,7 +196,7 @@
   
   
   
-    <p class="title logo__title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+    <p class="title logo__title">Machine Learning: demostraciones</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -212,16 +212,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+                    Machine Learning: demostraciones
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_verificaciones.html">Verificaciones de la sección 3.4.2</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Propiedades del estimador ridge (3.12)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_lasso_lars.html">Estimación lasso y algoritmo LARS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_bayes.html">Verificación de la regla óptima de Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Apéndice: código de verificación numérica</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Vecino más cercano</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lema_21.html">Lema 2.1: cota del error de 1-NN</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lema 2.2: masa de las celdas no visitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Regresión regularizada</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ridge.html">Regresión ridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lasso_lars.html">Lasso y algoritmo LARS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Clasificación bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bayes_41.html">Clasificador bayesiano (sección 4.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regla_optima_bayes.html">Regla óptima de Bayes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Boosting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adaboost_53.html">AdaBoost (sección 5.3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Máquinas de vectores de soporte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svr_613.html">Regresión SVR con tubo <span class="math notranslate nohighlight">\(\varepsilon\)</span> (sección 6.13)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Anexo: verificación numérica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
 </ul>
 
@@ -282,7 +302,7 @@
       
       
       
-      <li><a href="_sources/02_ridge.md" target="_blank"
+      <li><a href="_sources/lema_22.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Propiedades del estimador ridge (3.12)</h1>
+    <h1>Lema 2.2: masa de las celdas no visitadas</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,12 +388,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminares">Preliminares</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esperanza">1. Esperanza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-covarianza">2. Matriz de covarianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo">3. Sesgo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-cuadratico-medio-total">4. Error cuadrático medio total</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comentario">Comentario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-indicadoras-y-linealidad">Paso 1 · Indicadoras y linealidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-independencia">Paso 2 · Independencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-desigualdad-de-bernoulli">Paso 3 · Desigualdad de Bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-limite-n-to-infty">Paso 4 · Límite <span class="math notranslate nohighlight">\(n\to\infty\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-elevar-a-la-m">Paso 5 · Elevar a la <span class="math notranslate nohighlight">\(m\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-multiplicar-por-p-ge0-y-sumar">Paso 6 · Multiplicar por <span class="math notranslate nohighlight">\(p\ge0\)</span> y sumar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-maximizar-f-p-p-e-mp">Paso 7 · Maximizar <span class="math notranslate nohighlight">\(f(p)=p\,e^{-mp}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-sumar-las-r-cotas">Paso 8 · Sumar las <span class="math notranslate nohighlight">\(r\)</span> cotas</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -385,84 +410,94 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="propiedades-del-estimador-ridge-3-12">
-<h1>Propiedades del estimador ridge (3.12)<a class="headerlink" href="#propiedades-del-estimador-ridge-3-12" title="Link to this heading">#</a></h1>
-<section id="preliminares">
-<h2>Preliminares<a class="headerlink" href="#preliminares" title="Link to this heading">#</a></h2>
-<p>Las cuatro propiedades de (3.12) se verifican con el modelo <span class="math notranslate nohighlight">\(\boldsymbol{y}=X\boldsymbol{\beta}+\boldsymbol{\varepsilon}\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(\boldsymbol{\varepsilon})=\mathbf{0}\)</span> y <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{\varepsilon})=\sigma^2I_n\)</span>, con <span class="math notranslate nohighlight">\(X\)</span> centrada y estandarizada como en (3.11), verificado en el <a class="reference internal" href="01_verificaciones.html"><span class="doc">capítulo 1</span></a>. El estimador ridge es</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="lema-2-2-masa-de-las-celdas-no-visitadas">
+<h1>Lema 2.2: masa de las celdas no visitadas<a class="headerlink" href="#lema-2-2-masa-de-las-celdas-no-visitadas" title="Link to this heading">#</a></h1>
+<div class="admonition-enunciado admonition">
+<p class="admonition-title">Enunciado</p>
+<p>Sean <span class="math notranslate nohighlight">\(C_1,\dots,C_r\subseteq\mathcal{X}\)</span> y <span class="math notranslate nohighlight">\(S\)</span> una muestra i.i.d. de tamaño <span class="math notranslate nohighlight">\(m\)</span> con densidad <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> sobre <span class="math notranslate nohighlight">\(\mathcal{X}\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[
-\hat{\boldsymbol{\beta}}_R=(X^TX+\lambda I_p)^{-1}X^T\boldsymbol{y},\qquad \lambda&gt;0 .
-\]</div>
-<p>Sea <span class="math notranslate nohighlight">\(M=X^TX+\lambda I_p\)</span>. Se usan cuatro hechos:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(M\)</span> es simétrica porque <span class="math notranslate nohighlight">\(X^TX\)</span> lo es; por tanto, <span class="math notranslate nohighlight">\(M^{-1}\)</span> también.</p></li>
-<li><p><span class="math notranslate nohighlight">\(M\)</span> es invertible para todo <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span>: si <span class="math notranslate nohighlight">\(\boldsymbol{v}\neq\mathbf{0}\)</span>, entonces <span class="math notranslate nohighlight">\(\boldsymbol{v}^TM\boldsymbol{v}=\|X\boldsymbol{v}\|^2+\lambda\|\boldsymbol{v}\|^2&gt;0\)</span>. Esto vale aunque <span class="math notranslate nohighlight">\(X^TX\)</span> sea singular, y por eso ridge funciona con multicolinealidad.</p></li>
-<li><p>El estimador es lineal en <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span>: <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\beta}}_R=A\boldsymbol{y}\)</span>, con <span class="math notranslate nohighlight">\(A=M^{-1}X^T\)</span> constante (no aleatoria).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbb{E}(\boldsymbol{y})=X\boldsymbol{\beta}\)</span> y <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{y})=\sigma^2I_n\)</span>.</p></li>
-</ul>
-</section>
-<section id="esperanza">
-<h2>1. Esperanza<a class="headerlink" href="#esperanza" title="Link to this heading">#</a></h2>
-<p>El estimador ridge es sesgado: su esperanza es <span class="math notranslate nohighlight">\(M^{-1}X^TX\boldsymbol{\beta}\)</span>, no <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span>. Por linealidad de la esperanza:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathbb{E}(\hat{\boldsymbol{\beta}}_R)=A\,\mathbb{E}(\boldsymbol{y})=M^{-1}X^TX\boldsymbol{\beta}=(X^TX+\lambda I_p)^{-1}X^TX\boldsymbol{\beta} .\qquad\blacksquare
-\]</div>
-</section>
-<section id="matriz-de-covarianza">
-<h2>2. Matriz de covarianza<a class="headerlink" href="#matriz-de-covarianza" title="Link to this heading">#</a></h2>
-<p>Con el Ejercicio 1 de la sección 3.6, <span class="math notranslate nohighlight">\(\operatorname{Cov}(A\boldsymbol{y})=A\operatorname{Cov}(\boldsymbol{y})A^T\)</span>. Como <span class="math notranslate nohighlight">\(M^{-1}\)</span> es simétrica, <span class="math notranslate nohighlight">\((M^{-1})^T=M^{-1}\)</span>:</p>
+\[\mathbb{E}_{S\sim\mathcal{D}^m}\Big[\sum_{i:\,C_i\cap S=\emptyset} P(C_i)\Big] \le \frac{r}{m\,e}\]</div>
+</div>
+<section id="demostracion">
+<h2>Demostración<a class="headerlink" href="#demostracion" title="Link to this heading">#</a></h2>
+<section id="paso-1-indicadoras-y-linealidad">
+<h3>Paso 1 · Indicadoras y linealidad<a class="headerlink" href="#paso-1-indicadoras-y-linealidad" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(\mathbb{E}[\sum c_iZ_i]=\sum c_i\mathbb{E}[Z_i]\)</span>.</em></p>
+<p>Los índices con <span class="math notranslate nohighlight">\(C_i\cap S=\emptyset\)</span> dependen de la muestra, así que no se puede aplicar linealidad todavía. Se suma sobre los <span class="math notranslate nohighlight">\(r\)</span> índices fijos y la indicadora apaga las celdas visitadas.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)&amp;=\sigma^2M^{-1}X^T\left(M^{-1}X^T\right)^T\\
-&amp;=\sigma^2(X^TX+\lambda I_p)^{-1}X^TX(X^TX+\lambda I_p)^{-1} .\qquad\blacksquare
+&amp;\mathbb{E}_S\Big[\sum_{i:\,C_i\cap S=\emptyset} P(C_i)\Big] \\
+&amp;{}= \sum_{i=1}^r P(C_i)\,\mathbb{E}_S\big[\mathbf 1_{C_i\cap S=\emptyset}\big] \\
+&amp;{}= \sum_{i=1}^r P(C_i)\,P_S\big(C_i\cap S=\emptyset\big)
 \end{aligned}
 \end{split}\]</div>
-<p>En el enunciado de la página aparece <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{\beta}_R)\)</span>; debe ser <span class="math notranslate nohighlight">\(\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)\)</span>. Es una errata de notación.</p>
 </section>
-<section id="sesgo">
-<h2>3. Sesgo<a class="headerlink" href="#sesgo" title="Link to this heading">#</a></h2>
-<p>Como <span class="math notranslate nohighlight">\(X^TX=M-\lambda I_p\)</span>, se resta <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> de la esperanza de la propiedad 1:</p>
+<section id="paso-2-independencia">
+<h3>Paso 2 · Independencia<a class="headerlink" href="#paso-2-independencia" title="Link to this heading">#</a></h3>
+<p><em>Se usa: puntos i.i.d. y complemento.</em></p>
+<p>La celda queda vacía cuando ninguno de los <span class="math notranslate nohighlight">\(m\)</span> puntos cae en ella.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-\mathbb{E}(\hat{\boldsymbol{\beta}}_R)-\boldsymbol{\beta}&amp;=M^{-1}X^TX\boldsymbol{\beta}-M^{-1}M\boldsymbol{\beta}\\
-&amp;=M^{-1}\left(X^TX-M\right)\boldsymbol{\beta}=-\lambda(X^TX+\lambda I_p)^{-1}\boldsymbol{\beta} .\qquad\blacksquare
+&amp;P_S\big(C_i\cap S=\emptyset\big) = \big(1-P(C_i)\big)^m \quad\Rightarrow \\
+&amp;\quad \mathbb{E}_S[\cdot] = \sum_{i=1}^r P(C_i)\big(1-P(C_i)\big)^m
 \end{aligned}
 \end{split}\]</div>
-<p>Para <span class="math notranslate nohighlight">\(\lambda&gt;0\)</span> el sesgo es no nulo; se anula cuando <span class="math notranslate nohighlight">\(\lambda=0\)</span> (caso de mínimos cuadrados).</p>
 </section>
-<section id="error-cuadratico-medio-total">
-<h2>4. Error cuadrático medio total<a class="headerlink" href="#error-cuadratico-medio-total" title="Link to this heading">#</a></h2>
-<p>El error cuadrático medio total es la suma de la traza de la covarianza (varianzas) y el sesgo al cuadrado. Sea <span class="math notranslate nohighlight">\(\boldsymbol{W}=\hat{\boldsymbol{\beta}}_R-\boldsymbol{\beta}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{\mu}=\mathbb{E}(\boldsymbol{W})\)</span>. Restar la constante <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> no cambia la covarianza, así que <span class="math notranslate nohighlight">\(\operatorname{Cov}(\boldsymbol{W})=\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)\)</span>. Como <span class="math notranslate nohighlight">\(\boldsymbol{W}^T\boldsymbol{W}=\operatorname{tr}(\boldsymbol{W}\boldsymbol{W}^T)\)</span> y <span class="math notranslate nohighlight">\(\mathbb{E}(\boldsymbol{W}\boldsymbol{W}^T)=\operatorname{Cov}(\boldsymbol{W})+\boldsymbol{\mu}\boldsymbol{\mu}^T\)</span>:</p>
+<section id="paso-3-desigualdad-de-bernoulli">
+<h3>Paso 3 · Desigualdad de Bernoulli<a class="headerlink" href="#paso-3-desigualdad-de-bernoulli" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\((1+x)^n\ge 1+nx\)</span> para <span class="math notranslate nohighlight">\(x\ge-1\)</span>.</em></p>
+<p>Con <span class="math notranslate nohighlight">\(p=P(C_i)\)</span> y <span class="math notranslate nohighlight">\(x=-p/n\)</span> (cumple <span class="math notranslate nohighlight">\(x\ge-1\)</span> para <span class="math notranslate nohighlight">\(n\ge1\)</span>):</p>
 <div class="math notranslate nohighlight">
-\[
-\mathbb{E}\left[\boldsymbol{W}^T\boldsymbol{W}\right]=\operatorname{tr}\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)+\boldsymbol{\mu}^T\boldsymbol{\mu} .
-\]</div>
-<p><strong>Término de varianza.</strong> <span class="math notranslate nohighlight">\(X^TX\)</span> es simétrica y semidefinida positiva, luego existe una matriz ortogonal <span class="math notranslate nohighlight">\(\Gamma\)</span> con <span class="math notranslate nohighlight">\(X^TX=\Gamma L\Gamma^T\)</span> y <span class="math notranslate nohighlight">\(L=\operatorname{diag}(l_1,\dots,l_p)\)</span>. Entonces <span class="math notranslate nohighlight">\(M^{-1}=\Gamma(L+\lambda I)^{-1}\Gamma^T\)</span>. Con la propiedad 2 y la invariancia de la traza bajo permutaciones cíclicas:</p>
-<div class="math notranslate nohighlight">
-\[
-\operatorname{tr}\operatorname{Cov}(\hat{\boldsymbol{\beta}}_R)=\sigma^2\operatorname{tr}\!\left[(L+\lambda I)^{-1}L(L+\lambda I)^{-1}\right]=\sigma^2\sum_{j=1}^p\frac{l_j}{(l_j+\lambda)^2} .
-\]</div>
-<p><strong>Término de sesgo al cuadrado.</strong> Por la propiedad 3 y la simetría de <span class="math notranslate nohighlight">\(M^{-1}\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{\mu}^T\boldsymbol{\mu}=\lambda^2\left(M^{-1}\boldsymbol{\beta}\right)^T\left(M^{-1}\boldsymbol{\beta}\right)=\lambda^2\boldsymbol{\beta}^T(X^TX+\lambda I_p)^{-2}\boldsymbol{\beta} .
-\]</div>
-<p>Sumando ambos términos se obtiene la propiedad 4:</p>
+\[\Big(1-\frac{p}{n}\Big)^n \ge 1-p\]</div>
+</section>
+<section id="paso-4-limite-n-to-infty">
+<h3>Paso 4 · Límite <span class="math notranslate nohighlight">\(n\to\infty\)</span><a class="headerlink" href="#paso-4-limite-n-to-infty" title="Link to this heading">#</a></h3>
+<p><em>Se usa: logaritmo y regla de L’Hôpital.</em></p>
+<p>Sea <span class="math notranslate nohighlight">\(y=\lim_{n\to\infty}(1-p/n)^n\)</span>. Entonces</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
-\mathbb{E}\left[(\hat{\boldsymbol{\beta}}_R-\boldsymbol{\beta})^T(\hat{\boldsymbol{\beta}}_R-\boldsymbol{\beta})\right]&amp;=\sigma^2\sum_{j=1}^p\frac{l_j}{(l_j+\lambda)^2}\\
-&amp;\quad+\lambda^2\boldsymbol{\beta}^T(X^TX+\lambda I_p)^{-2}\boldsymbol{\beta} .\qquad\blacksquare
+&amp;\ln y = \lim_{n\to\infty}\frac{\ln(1-p/n)}{1/n} = \lim_{n\to\infty}\frac{\dfrac{p/n^2}{1-p/n}}{-1/n^2} \\
+&amp;{}= \lim_{n\to\infty}\frac{-p}{1-p/n} = -p \quad\Rightarrow\quad y=e^{-p}
+\end{aligned}
+\end{split}\]</div>
+<p>Como la desigualdad del paso 3 vale para todo <span class="math notranslate nohighlight">\(n\)</span>, se conserva en el límite:</p>
+<div class="math notranslate nohighlight">
+\[e^{-p}\ge 1-p\]</div>
+</section>
+<section id="paso-5-elevar-a-la-m">
+<h3>Paso 5 · Elevar a la <span class="math notranslate nohighlight">\(m\)</span><a class="headerlink" href="#paso-5-elevar-a-la-m" title="Link to this heading">#</a></h3>
+<p><em>Se usa: <span class="math notranslate nohighlight">\(0\le a\le b\Rightarrow a^m\le b^m\)</span>.</em></p>
+<p>Hace falta <span class="math notranslate nohighlight">\(1-p\ge0\)</span>, que se cumple porque <span class="math notranslate nohighlight">\(p\)</span> es una probabilidad.</p>
+<div class="math notranslate nohighlight">
+\[\big(1-p\big)^m \le e^{-mp}\]</div>
+</section>
+<section id="paso-6-multiplicar-por-p-ge0-y-sumar">
+<h3>Paso 6 · Multiplicar por <span class="math notranslate nohighlight">\(p\ge0\)</span> y sumar<a class="headerlink" href="#paso-6-multiplicar-por-p-ge0-y-sumar" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}_S\Big[\sum_{i:\,C_i\cap S=\emptyset} P(C_i)\Big] \le \sum_{i=1}^r P(C_i)\,e^{-mP(C_i)}\]</div>
+</section>
+<section id="paso-7-maximizar-f-p-p-e-mp">
+<h3>Paso 7 · Maximizar <span class="math notranslate nohighlight">\(f(p)=p\,e^{-mp}\)</span><a class="headerlink" href="#paso-7-maximizar-f-p-p-e-mp" title="Link to this heading">#</a></h3>
+<p><em>Se usa: derivada del producto.</em></p>
+<div class="math notranslate nohighlight">
+\[f'(p)=e^{-mp}-mp\,e^{-mp}=e^{-mp}(1-mp)=0 \iff p=\frac1m\]</div>
+<div class="math notranslate nohighlight">
+\[f''(p)=e^{-mp}\,(m^2p-2m)\quad\Rightarrow\quad f''\!\Big(\frac1m\Big)=-\frac{m}{e}&lt;0\]</div>
+<p>El signo negativo confirma un máximo. Además <span class="math notranslate nohighlight">\(f'&gt;0\)</span> para <span class="math notranslate nohighlight">\(p&lt;1/m\)</span> y <span class="math notranslate nohighlight">\(f'&lt;0\)</span> para <span class="math notranslate nohighlight">\(p&gt;1/m\)</span>, así que es el máximo global en <span class="math notranslate nohighlight">\([0,1]\)</span>.</p>
+</section>
+<section id="paso-8-sumar-las-r-cotas">
+<h3>Paso 8 · Sumar las <span class="math notranslate nohighlight">\(r\)</span> cotas<a class="headerlink" href="#paso-8-sumar-las-r-cotas" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\mathbb{E}_S\Big[\sum_{i:\,C_i\cap S=\emptyset} P(C_i)\Big] \le \sum_{i=1}^r f\!\Big(\frac1m\Big) \\
+&amp;{}= \sum_{i=1}^r \frac{1}{m}\,e^{-1} = \frac{r}{m\,e} \qquad\blacksquare
 \end{aligned}
 \end{split}\]</div>
 </section>
-<section id="comentario">
-<h2>Comentario<a class="headerlink" href="#comentario" title="Link to this heading">#</a></h2>
-<p>La varianza decrece con <span class="math notranslate nohighlight">\(\lambda\)</span>, porque cada sumando <span class="math notranslate nohighlight">\(l_j/(l_j+\lambda)^2\)</span> disminuye; el sesgo al cuadrado crece con <span class="math notranslate nohighlight">\(\lambda\)</span>. De ahí el compromiso sesgo-varianza. Si algún <span class="math notranslate nohighlight">\(l_j\)</span> es muy pequeño (multicolinealidad), el término <span class="math notranslate nohighlight">\(\sigma^2\sum_j 1/l_j\)</span> de mínimos cuadrados explota, mientras que ridge lo mantiene acotado.</p>
 </section>
 </section>
 
@@ -497,20 +532,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="01_verificaciones.html"
+       href="lema_21.html"
        title="página anterior">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">anterior</p>
-        <p class="prev-next-title">Verificaciones de la sección 3.4.2</p>
+        <p class="prev-next-title">Lema 2.1: cota del error de 1-NN</p>
       </div>
     </a>
     <a class="right-next"
-       href="03_lasso_lars.html"
+       href="ridge.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">Estimación lasso y algoritmo LARS</p>
+        <p class="prev-next-title">Regresión ridge</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -532,12 +567,17 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminares">Preliminares</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esperanza">1. Esperanza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-covarianza">2. Matriz de covarianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo">3. Sesgo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-cuadratico-medio-total">4. Error cuadrático medio total</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comentario">Comentario</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demostracion">Demostración</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-indicadoras-y-linealidad">Paso 1 · Indicadoras y linealidad</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-independencia">Paso 2 · Independencia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-desigualdad-de-bernoulli">Paso 3 · Desigualdad de Bernoulli</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-limite-n-to-infty">Paso 4 · Límite <span class="math notranslate nohighlight">\(n\to\infty\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-elevar-a-la-m">Paso 5 · Elevar a la <span class="math notranslate nohighlight">\(m\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-multiplicar-por-p-ge0-y-sumar">Paso 6 · Multiplicar por <span class="math notranslate nohighlight">\(p\ge0\)</span> y sumar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-maximizar-f-p-p-e-mp">Paso 7 · Maximizar <span class="math notranslate nohighlight">\(f(p)=p\,e^{-mp}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-sumar-las-r-cotas">Paso 8 · Sumar las <span class="math notranslate nohighlight">\(r\)</span> cotas</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

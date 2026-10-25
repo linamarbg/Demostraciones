@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Estimación lasso y algoritmo LARS &#8212; Demostraciones de regresión ridge, lasso y regla óptima de Bayes</title>
+    <title>Lasso y algoritmo LARS &#8212; Machine Learning: demostraciones</title>
   
   
   
@@ -63,12 +63,12 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="_static/../mathjax/tex-mml-chtml.js?v=cadf963e"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '03_lasso_lars';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lasso_lars';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Índice" href="genindex.html" />
     <link rel="search" title="Búsqueda" href="search.html" />
-    <link rel="next" title="Verificación de la regla óptima de Bayes" href="04_bayes.html" />
-    <link rel="prev" title="Propiedades del estimador ridge (3.12)" href="02_ridge.html" />
+    <link rel="next" title="Clasificador bayesiano (sección 4.1)" href="bayes_41.html" />
+    <link rel="prev" title="Regresión ridge" href="ridge.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="es"/>
   <meta name="docsearch:version" content="" />
@@ -196,7 +196,7 @@
   
   
   
-    <p class="title logo__title">Demostraciones de regresión ridge, lasso y regla óptima de Bayes</p>
+    <p class="title logo__title">Machine Learning: demostraciones</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -212,16 +212,36 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Demostraciones de regresión ridge, lasso y regla óptima de Bayes
+                    Machine Learning: demostraciones
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_verificaciones.html">Verificaciones de la sección 3.4.2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_ridge.html">Propiedades del estimador ridge (3.12)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Estimación lasso y algoritmo LARS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_bayes.html">Verificación de la regla óptima de Bayes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Apéndice: código de verificación numérica</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">2. Vecino más cercano</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lema_21.html">Lema 2.1: cota del error de 1-NN</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lema_22.html">Lema 2.2: masa de las celdas no visitadas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">3. Regresión regularizada</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ridge.html">Regresión ridge</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lasso y algoritmo LARS</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">4. Clasificación bayesiana</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bayes_41.html">Clasificador bayesiano (sección 4.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regla_optima_bayes.html">Regla óptima de Bayes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">5. Boosting</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="adaboost_53.html">AdaBoost (sección 5.3)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">6. Máquinas de vectores de soporte</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svr_613.html">Regresión SVR con tubo <span class="math notranslate nohighlight">\(\varepsilon\)</span> (sección 6.13)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Anexos</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="apendice_codigo.html">Anexo: verificación numérica</a></li>
 <li class="toctree-l1"><a class="reference internal" href="referencias.html">Referencias</a></li>
 </ul>
 
@@ -282,7 +302,7 @@
       
       
       
-      <li><a href="_sources/03_lasso_lars.md" target="_blank"
+      <li><a href="_sources/lasso_lars.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Descargar archivo fuente"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Estimación lasso y algoritmo LARS</h1>
+    <h1>Lasso y algoritmo LARS</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -392,11 +412,11 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="estimacion-lasso-y-algoritmo-lars">
-<h1>Estimación lasso y algoritmo LARS<a class="headerlink" href="#estimacion-lasso-y-algoritmo-lars" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lasso-y-algoritmo-lars">
+<h1>Lasso y algoritmo LARS<a class="headerlink" href="#lasso-y-algoritmo-lars" title="Link to this heading">#</a></h1>
 <section id="planteamiento">
 <h2>1. Planteamiento<a class="headerlink" href="#planteamiento" title="Link to this heading">#</a></h2>
-<p>Se trabaja con los datos observados normalizados como en (3.11), verificado en el <a class="reference internal" href="01_verificaciones.html"><span class="doc">capítulo 1</span></a>: <span class="math notranslate nohighlight">\(\sum_i y_i=0\)</span>, <span class="math notranslate nohighlight">\(\sum_i x_{ij}=0\)</span> y <span class="math notranslate nohighlight">\(\sum_i x_{ij}^2=n\)</span>. El estimador lasso minimiza</p>
+<p>Se trabaja con los datos observados normalizados como en (3.11), demostrado en el paso 8 de la <a class="reference internal" href="ridge.html"><span class="doc">regresión ridge</span></a>: <span class="math notranslate nohighlight">\(\sum_i y_i=0\)</span>, <span class="math notranslate nohighlight">\(\sum_i x_{ij}=0\)</span> y <span class="math notranslate nohighlight">\(\sum_i x_{ij}^2=n\)</span>. El estimador lasso minimiza</p>
 <div class="math notranslate nohighlight">
 \[
 S_\lambda(\boldsymbol{\beta})=(\boldsymbol{y}-X\boldsymbol{\beta})^T(\boldsymbol{y}-X\boldsymbol{\beta})+\lambda\sum_{j=1}^{p}|\beta_j|,\qquad \lambda&gt;0 .
@@ -596,20 +616,20 @@ c_j(\gamma)=c_j-\gamma a_j,\quad \boldsymbol{a}=X^T\boldsymbol{u}_\mathcal{A}.
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="02_ridge.html"
+       href="ridge.html"
        title="página anterior">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">anterior</p>
-        <p class="prev-next-title">Propiedades del estimador ridge (3.12)</p>
+        <p class="prev-next-title">Regresión ridge</p>
       </div>
     </a>
     <a class="right-next"
-       href="04_bayes.html"
+       href="bayes_41.html"
        title="siguiente página">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">siguiente</p>
-        <p class="prev-next-title">Verificación de la regla óptima de Bayes</p>
+        <p class="prev-next-title">Clasificador bayesiano (sección 4.1)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
